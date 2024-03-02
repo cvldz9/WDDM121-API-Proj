@@ -16,9 +16,53 @@
 .mainmenu {
     width: 65.5%;
     background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.greeting {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.findcity {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 100px;
+    padding: 5px;
+    justify-content: center;
+    width: 300px;
+    align-self: center;
+}
+
+.findcity input {
+    width: calc(100% - 30px);
+    border: none;
+    outline: none;
+    height: 20px;
+    padding: 5px;
+}
+
+
+.findcity i {
+    /* margin-left: 5px; */
+    color: black;
+    width: 30px;
+    height: 30px;
+    z-index: 1000;
 }
 
 .newsmenu {
     width: 30%;
     background-color: #f4f4f4;
+}
+
+.weather {
+    background-color: gray;
+    width: 95%;
+    height: 600px;
+    align-self: center;
+    margin-top: 25px;
 }
