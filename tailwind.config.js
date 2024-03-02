@@ -9,12 +9,14 @@ export default {
 			xl: "1440px",
 		},
 		colors: {
-			"p-text-black": "#0A0D14",
-			"p-text-grey": "#525866",
-			"p-green": "#38C793",
+			"p-black": "#000000",
+			"p-green": "#3D8206",
+			"p-purple": "#564592",
 			"p-dark-grey": "#242424",
-			"p-grey": "#D9D9D9",
+			"p-grey": "#F4F4F4",
+			"p-blue": "#456EAA",
 			"p-white": "#FFFFFF",
+			"p-red": "#FE1717",
 		},
 		fontFamily: {
 			inter: ["Inter"],
