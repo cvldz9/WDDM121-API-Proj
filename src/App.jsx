@@ -3,7 +3,10 @@ import "./App.css";
 function App() {
 	return (
 		<>
-			<div>Hello</div>
+			<div className="flex bg-p-green">
+				<div>hello</div>
+				<div>World</div>
+			</div>
 		</>
 	);
 }
