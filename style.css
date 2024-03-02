@@ -1,0 +1,24 @@
+
+.columns {
+    display: flex;
+    height: 1200px;
+}
+
+.sidemenu, .mainmenu, .newsmenu {
+    flex: 0 0 auto;
+}
+
+.sidemenu {
+    width: 4.5%;
+    background-color: #031837;
+}
+
+.mainmenu {
+    width: 65.5%;
+    background-color: white;
+}
+
+.newsmenu {
+    width: 30%;
+    background-color: #f4f4f4;
+}
