@@ -1,4 +1,6 @@
-
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 .columns {
     display: flex;
     height: 1200px;
@@ -54,11 +56,6 @@
     z-index: 1000;
 }
 
-.newsmenu {
-    width: 30%;
-    background-color: #f4f4f4;
-}
-
 .weather {
     background-color: gray;
     width: 95%;
@@ -66,3 +63,54 @@
     align-self: center;
     margin-top: 25px;
 }
+
+.weatherdetails {
+    display: grid;
+    grid-template-columns: 7fr 1fr 1fr 1fr; /* 40%, 20%, 20%, 20% */
+    height: 200px;
+    grid-column-gap: 5px; /* Set the gap between the columns */
+    grid-row-gap: 5px; /* Set the gap between the rows */
+    background-color: white; /* Set the background color of the grid container */
+    color: black; /* Set the text color */
+    width: 95%;
+    align-self: center;
+}
+
+.weatherdetails > * {
+    padding: 10px;
+}
+
+.weatherdetails > *:nth-child(1) {
+    background-color: gray;
+}
+
+.weatherdetails > *:nth-child(2) {
+    background-color: gray;
+    grid-column: 2 / span 1; /* Span 1 column */
+    text-align: center;
+}
+
+.weatherdetails > *:nth-child(3) {
+    background-color: gray;
+    grid-column: 3 / span 1; /* Span 1 column */
+    text-align: center;
+}
+
+.weatherdetails > *:nth-child(4) {
+    background-color: gray;
+    grid-column: 4 / span 1; /* Span 1 column */
+    text-align: center;
+}
+
+.weatherdetails p {
+    padding: 20px;
+    padding-left: 30px;
+}
+
+
+
+.newsmenu {
+    width: 30%;
+    background-color: #f4f4f4;
+}
+
