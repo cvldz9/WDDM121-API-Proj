@@ -1,3 +1,4 @@
+import "./Developers.css";
 function Developers({ isDarkMode }) {
 	return (
 		<>

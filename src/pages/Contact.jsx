@@ -1,3 +1,4 @@
+import "./Contact.css";
 function Contact({ isDarkMode }) {
 	return (
 		<>

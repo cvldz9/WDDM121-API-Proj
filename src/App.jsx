@@ -33,12 +33,12 @@ function App() {
 						/>
 
 						<Route
-							path="/featured-api"
+							path="/developers"
 							element={<Developers isDarkMode={isDarkMode} />}
 						/>
 
 						<Route
-							path="/featured-api"
+							path="/contact"
 							element={<Contact isDarkMode={isDarkMode} />}
 						/>
 					</Routes>
