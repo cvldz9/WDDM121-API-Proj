@@ -5,6 +5,9 @@ function News() {
 		<>
 			<div>News</div>
 			<div></div>
+
+			<img src="" alt="" />
+			<audio src=""></audio>
 		</>
 	);
 }
