@@ -10,6 +10,7 @@ function About({ isDarkMode }) {
 				</div>
 				<div>Box 2</div>
 				<div>Box 3</div>
+				<div>Box 4</div>
 			</div>
 		</>
 	);
