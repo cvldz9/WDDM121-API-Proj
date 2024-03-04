@@ -6,7 +6,7 @@ import PhoneIcon from "../assets/phoneIcon.svg";
 function Nav({ isDarkMode }) {
 	return (
 		<>
-			<div className="flex flex-col items-center justify-between text-p-white px-2 py-4">
+			<div className="flex flex-col items-center justify-between text-p-white px-2 py-4 shadow-lg">
 				<div className="">
 					<div className="flex flex-col items-center h-56">
 						<img src={Logo} alt="" />

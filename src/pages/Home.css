@@ -1,0 +1,4 @@
+.main-weather-display-wrap {
+	background-image: url("../assets/mainWeatherBg.svg");
+	background-size: cover;
+}

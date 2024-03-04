@@ -12,10 +12,10 @@ function App() {
 	return (
 		<>
 			<div className="flex bg-p-white h-dvh">
-				<div className="flex w-[3.75rem] bg-p-black">
+				<aside className="flex w-[3.75rem] bg-p-black">
 					<Nav isDarkMode={isDarkMode}></Nav>
-				</div>
-				<div className="flex">
+				</aside>
+				<main className="flex w-full">
 					<Routes>
 						<Route
 							path="/"
@@ -42,7 +42,7 @@ function App() {
 							element={<Contact isDarkMode={isDarkMode} />}
 						/>
 					</Routes>
-				</div>
+				</main>
 			</div>
 		</>
 	);

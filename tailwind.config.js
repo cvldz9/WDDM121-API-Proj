@@ -17,6 +17,7 @@ export default {
 			"p-blue": "#456EAA",
 			"p-white": "#FFFFFF",
 			"p-red": "#FE1717",
+			"p-tomato": "tomato",
 		},
 		fontFamily: {
 			inter: ["Inter"],
