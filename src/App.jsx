@@ -7,6 +7,7 @@ import Nav from "./components/Nav";
 import FeaturedApi from "./pages/FeaturedApi";
 import Developers from "./pages/Developers";
 import Contact from "./pages/Contact";
+import News from "./pages/News";
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	return (
@@ -40,6 +41,11 @@ function App() {
 						<Route
 							path="/contact"
 							element={<Contact isDarkMode={isDarkMode} />}
+						/>
+
+						<Route
+							path="/news"
+							element={<News isDarkMode={isDarkMode} />}
 						/>
 					</Routes>
 				</main>
