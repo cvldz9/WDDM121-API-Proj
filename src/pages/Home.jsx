@@ -1,9 +1,10 @@
 import pointerIcon from "../assets/pointerIcon.svg";
+import sunsetIcon from "../assets/sunsetIcon.svg";
 import "./Home.css";
 function Home({ isDarkMode }) {
 	return (
 		<>
-			<div className="w-full flex ">
+			<div className="w-full flex mb-5">
 				{/* main page left */}
 				<div className="w-full flex flex-col px-7 pt-9">
 					<div className="flex justify-between mb-3">
@@ -24,7 +25,7 @@ function Home({ isDarkMode }) {
 						</form>
 					</div>
 					{/* main weather display */}
-					<div className="main-weather-display-wrap flex justify-between p-6 text-p-white">
+					<div className="main-weather-display-wrap flex justify-between p-6 mb-5 text-p-white">
 						<div className=" m-7">
 							<div className="flex flex-col">
 								<h3>Tuesday 11:05 AM</h3>
@@ -47,6 +48,131 @@ function Home({ isDarkMode }) {
 							</div>
 						</div>
 					</div>
+
+					{/* Description area */}
+					<section className="flex gap-2 text-[0.75rem] mb-[3rem]">
+						<div className=" bg-p-grey grow p-[1.1875rem]">
+							<p>
+								Snowy conditions today, continuing through the
+								night. Wind gusts are up to 7 km / h.
+							</p>
+							<ul>
+								<li>
+									DressDress warmly and in layers to protect
+									against the cold.
+								</li>
+								<li>
+									Use appropriate footwear with good traction
+									to prevent slips and falls.
+								</li>
+								<li>
+									Roads may become slippery and hazardous,
+									exercise caution while driving.
+								</li>
+							</ul>
+						</div>
+						<div className="flex flex-col items-center gap-[0.3125rem] bg-p-grey w-[6.875rem] p-[1.1875rem]">
+							<h3>Sunset</h3>
+							<img src={sunsetIcon} alt="" />
+							<p className=" font-semibold text-sm">6:07 PM</p>
+						</div>
+						<div className=" flex flex-col items-center gap-[0.3125rem] bg-p-grey w-[6.875rem] p-[1.1875rem]">
+							<h3>Air Quality</h3>
+							<h2 className="text-p-green text-[1.25rem]">1</h2>
+							<p className=" font-semibold text-sm">Low Risk</p>
+						</div>
+						<div className=" flex flex-col items-center gap-[0.3125rem] bg-p-grey w-[6.875rem] p-[1.1875rem]">
+							<h3>UV Index</h3>
+							<h2 className="text-p-blue text-[1.25rem]">0</h2>
+							<p className=" font-semibold text-sm">Low</p>
+						</div>
+					</section>
+
+					{/* Forecast */}
+					<section>
+						<h3 className="font-semibold text-[1.25rem] mb-5">
+							Forecast
+						</h3>
+						<div className="w-full flex justify-between">
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+							<div className=" p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+								<h1 className="font-semibold text-sm">
+									Wednesday
+								</h1>
+								<img src={sunsetIcon} alt="" />
+								<p className="text-[1.125rem]">-8</p>
+								<div className="w-full flex justify-between text-[0.75rem]">
+									<div>L: -14</div>
+									<div>H: -7</div>
+								</div>
+							</div>
+						</div>
+					</section>
 				</div>
 
 				{/* main page right for the news display */}
