@@ -2,3 +2,12 @@
 .contact-paragraph {
     width: 65%; /* Adjust the width as needed */
   }
+
+.letstalk {
+  background-color: rgb(148, 100, 253);
+  color: white;
+}
+
+.letstalk:hover {
+  background-color: rgb(117, 55, 251);
+}

@@ -9,7 +9,7 @@ function Contact({ isDarkMode }) {
           <p className="contact-paragraph text-center">Reach out to us today and let's start a conversation. Whether you have questions, feedback, or simply want to say hello, we're here to listen and assist you. Get in touch and discover how we can collaborate to achieve your goals.</p>
         </div>
 
-        <div className="isolate bg-white px-6 py-4 sm:py-2 lg:px-8">
+        <div className="isolate bg-white px-6 py-4 sm:py-1 lg:px-8">
           <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]" aria-hidden="true">
             <div className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]" style={{ clipPath: "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)" }}></div>
           </div>
@@ -80,7 +80,7 @@ function Contact({ isDarkMode }) {
               </div>
             </div>
             <div className="mt-10">
-              <button type="submit" className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Let's talk</button>
+				<button type="submit" className="block w-full rounded-md letstalk px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:border-transparent">Let's talk</button>
             </div>
           </form>
         </div>
