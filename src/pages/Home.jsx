@@ -6,7 +6,7 @@ function Home({ isDarkMode }) {
 		<>
 			<div className="w-full flex mb-5">
 				{/* main page left */}
-				<div className="w-full flex flex-col px-7 pt-9">
+				<div className="w-full flex flex-col px-7 pt-9 overflow-y-auto">
 					<div className="flex justify-between mb-3">
 						<h3 className=" text-2xl">Hello, good morning</h3>
 						<h6>February 06, 2024</h6>
