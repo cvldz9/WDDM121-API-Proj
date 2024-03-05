@@ -40,7 +40,7 @@ function Developers({ isDarkMode }) {
 			<img className="img-width h-auto" src={CatherineImage} alt="" />
             <div>
 				<p className="m-4 font-semibold text-xl">Catherine Valdez</p>
-				<p className="m-4 font-normal text-s text-justify">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium, est? Quam reprehenderit reiciendis harum. Iusto dolorem vel voluptates molestiae? Est molestias accusantium qui. Totam eos itaque harum illum? Culpa sint hic dolorem expedita pariatur iure explicabo esse eligendi totam sunt quis deleniti, quas eos qui ullam? Hic quos rerum numquam.</p>
+				<p className="m-4 font-normal text-s text-justify">Catherine has a strong background in <strong>software testing</strong>, <strong>UI/UX design</strong>, and <strong>web design</strong>. With her expertise, she ensures the quality and functionality of software products through rigorous testing methodologies. Additionally, her keen eye for design and user experience allows her to create visually appealing and intuitive interfaces that enhance user engagement and satisfaction.</p>
 			</div>
           </div>
         </div>
