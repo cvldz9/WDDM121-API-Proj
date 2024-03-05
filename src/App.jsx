@@ -47,6 +47,12 @@ function App() {
 							path="/news"
 							element={<News isDarkMode={isDarkMode} />}
 						/>
+
+						<Route
+							path="/test"
+							element={<News isDarkMode={isDarkMode} />}
+						/>
+						
 					</Routes>
 				</main>
 			</div>

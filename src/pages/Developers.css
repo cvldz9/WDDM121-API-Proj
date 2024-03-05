@@ -2,4 +2,11 @@
 .sub-paragraph {
     width: 80%; /* Adjust the width as needed */
   }
+
+.box-width {
+    width: 500px;
+    height: 350px;
+}
+
+
   
