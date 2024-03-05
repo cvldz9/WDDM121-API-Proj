@@ -71,9 +71,9 @@ function Home({ isDarkMode }) {
 								</li>
 							</ul>
 						</div>
-						<div className="flex flex-col items-center gap-[0.3125rem] bg-p-grey w-[6.875rem] p-[1.1875rem]">
+						<div className="flex flex-col items-center justify-between bg-p-grey w-[6.875rem] p-[1.1875rem]">
 							<h3>Sunset</h3>
-							<img src={sunsetIcon} alt="" />
+							<img className="w-6 h-6" src={sunsetIcon} alt="" />
 							<p className=" font-semibold text-sm">6:07 PM</p>
 						</div>
 						<div className=" flex flex-col items-center gap-[0.3125rem] bg-p-grey w-[6.875rem] p-[1.1875rem]">
