@@ -4,8 +4,11 @@
   }
 
 .box-width {
-    width: 600px;
+    width: 650px;
     height: 350px;
+    background-color: rgb(244, 244, 244, 0.5);
+    /* border: 0.5px, #313131 solid; */
+    border: none;
 }
 
 .img-width {
