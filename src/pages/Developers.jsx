@@ -1,4 +1,9 @@
 import "./Developers.css";
+import JosephImage from "../assets/joseph.svg";
+import DanielImage from "../assets/daniel.svg";
+import PattyImage from "../assets/patty.svg";
+import CatherineImage from "../assets/catherine.svg";
+
 
 function Developers({ isDarkMode }) {
   return (
@@ -9,11 +14,9 @@ function Developers({ isDarkMode }) {
           <p className="sub-paragraph text-center">Explore this page to learn more about each member of our team. Discover their areas of expertise, passions, and contributions to our projects. Get to know the faces behind the code and see firsthand the dedication and passion that drive us forward. Join us on our journey as we collaborate, innovate, and create groundbreaking solutions together.</p>
         </div>
         <div className="grid gap-10 grid-cols-2 grid-rows-2">
-          <div className="box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
-			<div>
-				<img src="" alt="" />
-			</div>
-            Joseph Moses
+          <div className="flex box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
+			<img className="img-width h-auto" src={JosephImage} alt="" />
+            <div>Joseph Moses</div>
           </div>
           <div className="box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
             Daniel Okonkwo

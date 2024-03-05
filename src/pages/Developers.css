@@ -4,8 +4,14 @@
   }
 
 .box-width {
-    width: 500px;
+    width: 600px;
     height: 350px;
+}
+
+.img-width {
+    width: 300px;
+    height: auto;
+    background-size: cover;
 }
 
 
