@@ -12,7 +12,7 @@ function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	return (
 		<>
-			<div className="flex bg-p-white h-screen">
+			<div className="flex w-screen bg-p-white h-screen">
 				<aside className="flex w-[3.75rem] bg-p-black">
 					<Nav isDarkMode={isDarkMode}></Nav>
 				</aside>

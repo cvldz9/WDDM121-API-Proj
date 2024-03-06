@@ -1,6 +1,6 @@
 import pointerIcon from "../assets/pointerIcon.svg";
 import sunsetIcon from "../assets/sunsetIcon.svg";
-import newsImage from "../assets/newsImage.svg";
+import HomeNews from "../components/HomeNews";
 
 import "./Home.css";
 function Home({ isDarkMode }) {
@@ -178,32 +178,7 @@ function Home({ isDarkMode }) {
 				</div>
 
 				{/* main page right for the news display */}
-				<div className="flex flex-col gap-2 w-[27.313rem] px-3 py-4 overflow-y-auto h-dvh bg-p-grey">
-					{/* Breaking News */}
-					<div className="flex rounded-md bg-p-white p-5">
-						<div className="flex flex-col w-full">
-							<h3 className=" bg-p-red rounded-sm py-2 px-5 mb-4 w-full text-p-white text-[0.875rem]">
-								Breaking News!!!
-							</h3>
-							<div className="flex gap-4">
-								<img
-									className="rounded-md"
-									src={newsImage}
-									alt=""
-								/>
-								<div className="flex flex-col justify-between">
-									<p className="text-[0.875rem]">
-										Canada: New Reforms for International
-										Students Starting 2024
-									</p>
-									<h6 className="text-[0.875rem] text-p-grey">
-										just now
-									</h6>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<HomeNews />
 			</div>
 		</>
 	);
