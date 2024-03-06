@@ -1,4 +1,5 @@
-import pointerIcon from "../assets/pointerIcon.svg";
+import pointerPurpleIcon from "../assets/pointerPurpleIcon.svg";
+import pointerWhiteIcon from "../assets/pointerWhiteIcon.svg";
 import sunsetIcon from "../assets/sunsetIcon.svg";
 import HomeNews from "../components/HomeNews";
 
@@ -22,7 +23,7 @@ function Home({ isDarkMode }) {
 									type="text"
 									placeholder="Find a city"
 								/>
-								<img src={pointerIcon} alt="" />
+								<img src={pointerPurpleIcon} alt="" />
 							</div>
 						</form>
 					</div>
@@ -30,10 +31,24 @@ function Home({ isDarkMode }) {
 					<div className="main-weather-display-wrap flex justify-between p-6 mb-5 text-p-white">
 						<div className=" m-7">
 							<div className="flex flex-col">
-								<h3>Tuesday 11:05 AM</h3>
-								<h3> Toronto</h3>
-								<h2 className=" text-[9.7rem]">-4</h2>
-								<h3>Snowing</h3>
+								<p className="uppercase mb-4 text-[0.75rem]">
+									Tuesday 11:05 AM
+								</p>
+
+								<div className="flex gap-1 mb-16 items-center text-2">
+									<img
+										className="text-p-white"
+										src={pointerWhiteIcon}
+										alt=""
+									/>
+									<h3>Toronto</h3>
+								</div>
+								<p className="p-0 m-0 leading-[0.8] text-[9.7rem]">
+									-4
+								</p>
+								<p className=" font-[500] text-[2.19rem]">
+									Snowing
+								</p>
 								<div className="flex gap-3">
 									<div>L: -14</div>
 									<div>H: -7</div>
