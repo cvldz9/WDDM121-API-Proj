@@ -35,7 +35,7 @@ function Developers({ isDarkMode }) {
             <img className="img-width h-auto" src={PattyImage} alt="" />
             <div>
               <p className="m-4 font-semibold text-xl">Patty Bactad</p>
-              <p className="m-4 font-normal text-s text-justify">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quam illo quas unde voluptatem perferendis quo quis quidem delectus tempora ad. Molestias inventore dolorem saepe magni deleniti eveniet sunt asperiores aut non aliquid voluptas libero dicta, id sequi sapiente expedita officiis quos nihil ipsum exercitationem. Id molestiae dolore aliquid dolor dicta.</p>
+              <p className="m-4 font-normal text-s text-justify">Patty is a seasoned <strong>Senior Information Security Engineer</strong> with 8 years of experience. She excels in developing robust security protocols and conducting vulnerability assessments. Additionally, Patty brings proficiency in <strong>graphic</strong> and <strong>web design</strong>, combining creativity with her technical expertise to deliver innovative solutions and captivating design projects.</p>
             </div>
           </div>
 
