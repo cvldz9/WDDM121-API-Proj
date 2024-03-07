@@ -7,7 +7,6 @@ function About({ isDarkMode }) {
       <div className="flex flex-col items-center">
         <h3 className="text-center pb-8 pt-10 px-20 text-2xl self-center font-bold">About</h3>
         <div className="flex justify-center items-center flex-col pb-8">
-          {/* Updated the image size and added utility classes for centering */}
           <img className="w-[40rem] mb-4" src={GlobeImage} alt="" />
 
           <p className="sub-paragraph text-center">

@@ -1,0 +1,13 @@
+.sub-paragraph {
+    width: 80%; /* Adjust the width as needed */
+  }
+
+  /* FeaturedApi.css */
+
+.box {
+    /* Add your desired styling for the boxes */
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc;
+  }
+  
