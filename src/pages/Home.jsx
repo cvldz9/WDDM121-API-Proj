@@ -91,6 +91,8 @@ function Home({ isDarkMode, weatherData, newsData }) {
 		<>
 			<div className="w-full flex mb-5">
 				{/* main page left */}
+				{!weatherData && "loading"}
+
 				{weatherData && (
 					<div className="w-full flex flex-col px-7 pt-9 overflow-y-auto">
 						<div className="flex justify-between mb-3">
@@ -126,28 +128,28 @@ function Home({ isDarkMode, weatherData, newsData }) {
 										/>
 										<h3>
 											{
-												weatherData?.timezone.split(
+												weatherData?.timezone?.split(
 													"/"
 												)[1]
 											}
 										</h3>
 									</div>
 									<p className="p-0 m-0 leading-[0.8] text-[9.7rem]">
-										{weatherData?.current.temp}
+										{weatherData?.current?.temp}
 									</p>
 									<p className=" font-[500] text-[2.19rem]">
-										{weatherData?.current.weather[0].main}
+										{weatherData?.current?.weather[0]?.main}
 									</p>
 									<div className="text-[0.75rem] font-bold flex gap-3">
 										<div>
-											L: {weatherData?.daily[0].temp.min}
+											L: {weatherData?.daily[0]?.temp.min}
 										</div>
 										<div>
-											H: {weatherData?.daily[0].temp.max}
+											H: {weatherData?.daily[0]?.temp.max}
 										</div>
 										<div>
 											Feels:{" "}
-											{weatherData?.current.feels_like}
+											{weatherData?.current?.feels_like}
 										</div>
 									</div>
 								</div>
@@ -167,10 +169,10 @@ function Home({ isDarkMode, weatherData, newsData }) {
 							<div className=" bg-p-grey grow p-[1.1875rem]">
 								<p>
 									{/* summary */}
-									{weatherData?.daily[0].summary}
+									{weatherData?.daily[0]?.summary}
 								</p>
 								{/* Alert */}
-								<p>{weatherData?.alerts[0].description}</p>
+								{/* <p>{weatherData?.alerts[0].description}</p> */}
 								{/* <ul>
 									<li>
 										DressDress warmly and in layers to
@@ -226,23 +228,153 @@ function Home({ isDarkMode, weatherData, newsData }) {
 								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
 									<h1 className="font-semibold text-sm">
 										{convertEpochToDay(
-											weatherData?.daily[0].dt
+											weatherData?.daily[0]?.dt
 										)}
 									</h1>
 									<img src={sunsetIcon} alt="" />
 									<p className="text-[1.125rem]">
-										{weatherData?.daily[0].temp.day}
+										{weatherData?.daily[0]?.temp?.day}
 									</p>
 									<div className="w-full flex justify-between text-[0.75rem]">
 										<div>
-											L: {weatherData?.daily[0].temp.min}
+											L:{" "}
+											{weatherData?.daily[0]?.temp?.min}
 										</div>
 										<div>
-											H: {weatherData?.daily[0].temp.max}
+											H:{" "}
+											{weatherData?.daily[0]?.temp?.max}
+										</div>
+									</div>
+								</div>
+
+								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[1]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[1]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[1]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[1]?.temp?.max}
 										</div>
 									</div>
 								</div>
 								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[2]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[2]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[2]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[2]?.temp?.max}
+										</div>
+									</div>
+								</div>
+								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[3]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[3]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[3]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[3]?.temp?.max}
+										</div>
+									</div>
+								</div>
+								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[4]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[4]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[4]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[4]?.temp?.max}
+										</div>
+									</div>
+								</div>
+								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[5]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[5]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[5]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[5]?.temp?.max}
+										</div>
+									</div>
+								</div>
+								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
+									<h1 className="font-semibold text-sm">
+										{convertEpochToDay(
+											weatherData?.daily[6]?.dt
+										)}
+									</h1>
+									<img src={sunsetIcon} alt="" />
+									<p className="text-[1.125rem]">
+										{weatherData?.daily[6]?.temp?.day}
+									</p>
+									<div className="w-full flex justify-between text-[0.75rem]">
+										<div>
+											L:{" "}
+											{weatherData?.daily[6]?.temp?.min}
+										</div>
+										<div>
+											H:{" "}
+											{weatherData?.daily[6]?.temp?.max}
+										</div>
+									</div>
+								</div>
+
+								{/* <div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
 									<h1 className="font-semibold text-sm">
 										Wednesday
 									</h1>
@@ -307,7 +439,7 @@ function Home({ isDarkMode, weatherData, newsData }) {
 										<div>L: -14</div>
 										<div>H: -7</div>
 									</div>
-								</div>
+								</div> */}
 							</div>
 						</section>
 					</div>

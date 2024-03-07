@@ -10,8 +10,9 @@ import Contact from "./pages/Contact";
 import News from "./pages/News";
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
-	const [weatherData, setWeatherData] = useState({});
-	const [newsData, setNewsData] = useState({});
+	const [weatherData, setWeatherData] = useState(null);
+	// const [city, setWeatherData] = useState({});
+	const [newsData, setNewsData] = useState(null);
 
 	const newsDataFile = {
 		meta: {
@@ -250,7 +251,7 @@ function App() {
 
 	const getWeatherDetails = async (lat, lon) => {
 		await fetch(
-			`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=b371a830adebb46050765c8560fc2b85`
+			`https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&units=metric&appid=0ce47a12ed37953b3ce62625a1bb4c03`
 			// `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=b371a830adebb46050765c8560fc2b85`
 		)
 			.then((res) => {
@@ -260,7 +261,9 @@ function App() {
 				console.log("data", data);
 				// const { timezone } = data;
 				setWeatherData(data);
-				console.log("data timezone", weatherData.timezone);
+				console.log("data timezone", weatherData?.timezone);
+
+				getNewsDetails("weather", weatherData?.timezone?.split("/")[1]);
 			})
 			.catch((err) => {
 				console.log("err", err);
@@ -278,27 +281,27 @@ function App() {
 		// 	.catch((error) =>
 		// 		console.error("Error fetching news data:", error)
 		// 	);
-		console.log("newsData", newsDataFile);
-		// await fetch(
-		// 	`https://api.thenewsapi.com/v1/news/top?search=weather + toronto&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=3`
-		// )
-		// 	.then((res) => {
-		// 		return res.json(); // Add return statement here
-		// 	})
-		// 	.then((data) => {
-		// 		console.log("news data", data);
-		// 		// const { timezone } = data;
-		// 		setWeatherData(data);
-		// 		console.log("data timezone", weatherData.timezone);
-		// 	})
-		// 	.catch((err) => {
-		// 		console.log("err", err);
-		// 	});
+		// console.log("newsData", newsDataFile);
+		await fetch(
+			`https://api.thenewsapi.com/v1/news/top?search=weather + ${city}&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=3`
+		)
+			.then((res) => {
+				return res.json(); // Add return statement here
+			})
+			.then((data) => {
+				console.log("news data", data);
+				// const { timezone } = data;
+				setNewsData(data);
+				console.log("data news", newsData);
+			})
+			.catch((err) => {
+				console.log("err", err);
+			});
 	};
 
 	useEffect(() => {
-		// userCurrentLocation();
-		getNewsDetails("weather", "city");
+		userCurrentLocation();
+		// getNewsDetails("weather", "city");
 	}, []);
 	// getWeatherDetails();
 	return (
@@ -313,8 +316,8 @@ function App() {
 							path="/"
 							element={
 								<Home
-									weatherData={weatherDataFile}
-									newsData={newsDataFile}
+									weatherData={weatherData}
+									newsData={newsData}
 									isDarkMode={isDarkMode}
 								/>
 							}
