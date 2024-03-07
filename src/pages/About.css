@@ -1,0 +1,9 @@
+/* Add margin-bottom to the img element */
+.flex img {
+    margin-bottom: 20px; /* You can adjust the value as needed */
+  }
+  
+  /* You can also add padding-bottom to the div element if you prefer */
+  .flex div {
+    padding-bottom: 20px; /* You can adjust the value as needed */
+  }
