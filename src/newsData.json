@@ -1,0 +1,55 @@
+{
+	"meta": {
+		"found": 253,
+		"returned": 3,
+		"limit": 3,
+		"page": 1
+	},
+	"data": [
+		{
+			"uuid": "399ab887-df82-420e-8210-e50649b89a3e",
+			"title": "2022 IndyCar at Toronto: How to watch, stream, preview, teams to watch in the Honda Indy Toronto Grand Prix",
+			"description": "Team Penske aims to continue their roll as off-track controversy swirls around at Chip Ganassi Racing, Arrow McLaren SP and Andretti Autosport",
+			"keywords": "",
+			"snippet": "The beginning of July marked Formula 1's return to Canada, and this weekend the IndyCar Series gets its chance along the streets of downtown Toronto. COVID-19 w...",
+			"url": "https://www.cbssports.com/motor-sports/news/2022-indycar-at-toronto-how-to-watch-stream-preview-teams-to-watch-in-the-honda-indy-toronto-grand-prix/",
+			"image_url": "https://sportshub.cbsistatic.com/i/r/2022/07/14/b11641e6-4520-40be-82d6-dfc2f9a2f2e2/thumbnail/1200x675/fe963de94129f82f8f55974e44503b92/scott-mclaughlin-usatsi.jpg",
+			"language": "en",
+			"published_at": "2022-07-14T21:39:26.000000Z",
+			"source": "cbssports.com",
+			"categories": ["sports"],
+			"relevance_score": 21.522888,
+			"locale": "us"
+		},
+		{
+			"uuid": "827f69ef-143b-41b0-af1b-2d789a1c6eae",
+			"title": "Airline issue weather waivers as winter storm moves through the country",
+			"description": "Tuesday's winter weather was having a fairly limited impact on flights, but airlines were providing travelers options to change their itineraries.",
+			"keywords": "",
+			"snippet": "Airline issue weather waivers as winter storm moves through the country\n\nShow Caption Hide Caption Winter storms reach US East and West Coasts Winter storms are...",
+			"url": "https://www.usatoday.com/story/travel/airline-news/2023/02/28/airline-weather-waivers/11363932002/",
+			"image_url": "https://www.gannett-cdn.com/presto/2023/02/28/USAT/55cdddaa-340c-45e1-9f9f-02b91abefb40-AP_Winter_Storm_Utah.jpg?auto=webp&crop=6271,3527,x14,y0&format=pjpg&width=1200",
+			"language": "en",
+			"published_at": "2023-02-28T15:49:46.000000Z",
+			"source": "usatoday.com",
+			"categories": ["travel"],
+			"relevance_score": 20.758945,
+			"locale": "us"
+		},
+		{
+			"uuid": "65b9f63a-a445-4178-9127-11b9dbbeb332",
+			"title": "Toronto anti-capitalist 'pay what you can' café closes after year in business",
+			"description": "A self-described \"anti-capitalist\" café and coffee shop in Canada named The Anarchist with a \"pay what you can\" business model will close at the end of the mon...",
+			"keywords": "News, canada, capitalism, coffee shops, radical, toronto",
+			"snippet": "A self-described “anti-capitalist” café and coffee shop in Canada named The Anarchist with a “pay what you can” business model will close at the end of...",
+			"url": "https://nypost.com/2023/05/16/toronto-anti-capitalist-pay-what-you-can-cafe-closes-after-year-in-business/",
+			"image_url": "https://nypost.com/wp-content/uploads/sites/2/2023/05/Screen-Shot-2023-05-16-at-123958-AM-copy.jpg?quality=75&strip=all&w=1024",
+			"language": "en",
+			"published_at": "2023-05-16T06:01:11.000000Z",
+			"source": "nypost.com",
+			"categories": ["general"],
+			"relevance_score": 20.342953,
+			"locale": "us"
+		}
+	]
+}
