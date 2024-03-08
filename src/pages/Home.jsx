@@ -84,6 +84,26 @@ function Home({ isDarkMode, weatherData, newsData }) {
 
 		return dayOfWeek;
 	}
+	function formatEpochTime(epoch) {
+		// Create a new Date object with the epoch time
+		const date = new Date(epoch * 1000);
+
+		// Get hours, minutes, and AM/PM
+		let hours = date.getHours();
+		const minutes = date.getMinutes();
+		const ampm = hours >= 12 ? "PM" : "AM";
+
+		// Convert hours to 12-hour format
+		hours = hours % 12;
+		hours = hours || 12; // Convert 0 to 12 for 12-hour format
+
+		// Format the time
+		const formattedTime = `${hours}:${
+			minutes < 10 ? "0" + minutes : minutes
+		} ${ampm}`;
+
+		return formattedTime;
+	}
 
 	const currentTime = getCurrentTime();
 	const currentDate = getCurrentDate();
@@ -134,33 +154,180 @@ function Home({ isDarkMode, weatherData, newsData }) {
 											}
 										</h3>
 									</div>
-									<p className="p-0 m-0 leading-[0.8] text-[9.7rem]">
-										{weatherData?.current?.temp}
+									<p className="flex p-0 m-0 leading-[0.8] text-[9.7rem]">
+										{parseInt(weatherData?.current?.temp)}{" "}
+										<sup className="text-4xl mt-3">o</sup>
 									</p>
 									<p className=" font-[500] text-[2.19rem]">
 										{weatherData?.current?.weather[0]?.main}
 									</p>
 									<div className="text-[0.75rem] font-bold flex gap-3">
 										<div>
-											L: {weatherData?.daily[0]?.temp.min}
+											L:{" "}
+											{parseInt(
+												weatherData?.daily[0]?.temp.min
+											)}
+											<sup className="text-[0.5rem] mt-3">
+												o
+											</sup>
 										</div>
 										<div>
-											H: {weatherData?.daily[0]?.temp.max}
+											H:{" "}
+											{parseInt(
+												weatherData?.daily[0]?.temp.max
+											)}
+											<sup className="text-[0.5rem] mt-3">
+												o
+											</sup>
 										</div>
 										<div>
 											Feels:{" "}
-											{weatherData?.current?.feels_like}
+											{parseInt(
+												weatherData?.current?.feels_like
+											)}
+											<sup className="text-[0.5rem] mt-3">
+												o
+											</sup>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div className="flex flex-col w-72 gap-5">
-								<div className=" bg-p-purple rounded-lg p-4">
-									asfe
+							<div className="flex flex-col w-72 gap-3">
+								<div className="flex justify-between bg-p-purple rounded-lg p-1">
+									<div className="gap-1 text-p-white bg-p-purple flex flex-col items-center justify-between ">
+										<img
+											src={`http://openweathermap.org/img/wn/${weatherData?.hourly[1]?.weather[0].icon}.png`}
+											alt=""
+										/>
+										<p className="text-[1.125rem]">
+											{parseInt(
+												weatherData?.hourly[1]?.temp
+											)}
+											<sup className="text-[0.6rem] mt-1">
+												o
+											</sup>
+										</p>
+										<div className="w-full flex justify-center text-[0.75rem]">
+											<div>
+												{
+													formatEpochTime(
+														weatherData?.hourly[1]
+															?.dt
+													)
+														.split(" ")[0]
+														.split(":")[0]
+												}{" "}
+												{
+													formatEpochTime(
+														weatherData?.hourly[1]
+															?.dt
+													).split(" ")[1]
+												}
+											</div>
+										</div>
+									</div>
+
+									<div className="gap-1 text-p-white bg-p-purple flex flex-col items-center justify-between">
+										<img
+											src={`http://openweathermap.org/img/wn/${weatherData?.hourly[2]?.weather[0].icon}.png`}
+											alt=""
+										/>
+										<p className="text-[1.125rem]">
+											{parseInt(
+												weatherData?.hourly[2]?.temp
+											)}
+											<sup className="text-[0.6rem] mt-1">
+												o
+											</sup>
+										</p>
+										<div className="w-full flex justify-center text-[0.75rem]">
+											<div>
+												{
+													formatEpochTime(
+														weatherData?.hourly[2]
+															?.dt
+													)
+														.split(" ")[0]
+														.split(":")[0]
+												}{" "}
+												{
+													formatEpochTime(
+														weatherData?.hourly[2]
+															?.dt
+													).split(" ")[1]
+												}
+											</div>
+										</div>
+									</div>
+									<div className="gap-1 text-p-white bg-p-purple flex flex-col items-center justify-between ">
+										<img
+											src={`http://openweathermap.org/img/wn/${weatherData?.hourly[3]?.weather[0].icon}.png`}
+											alt=""
+										/>
+										<p className="text-[1.125rem]">
+											{parseInt(
+												weatherData?.hourly[3]?.temp
+											)}
+											<sup className="text-[0.6rem] mt-1">
+												o
+											</sup>
+										</p>
+										<div className="w-full flex justify-center text-[0.75rem]">
+											<div>
+												{
+													formatEpochTime(
+														weatherData?.hourly[3]
+															?.dt
+													)
+														.split(" ")[0]
+														.split(":")[0]
+												}{" "}
+												{
+													formatEpochTime(
+														weatherData?.hourly[3]
+															?.dt
+													).split(" ")[1]
+												}
+											</div>
+										</div>
+									</div>
+
+									<div className="gap-1 text-p-white bg-p-purple flex flex-col items-center justify-between">
+										<img
+											src={`http://openweathermap.org/img/wn/${weatherData?.hourly[4]?.weather[0].icon}.png`}
+											alt=""
+										/>
+										<p className="text-[1.125rem]">
+											{parseInt(
+												weatherData?.hourly[4]?.temp
+											)}
+											<sup className="text-[0.6rem] mt-1">
+												o
+											</sup>
+										</p>
+										<div className="w-full flex justify-center text-[0.75rem]">
+											<div>
+												{
+													formatEpochTime(
+														weatherData?.hourly[4]
+															?.dt
+													)
+														.split(" ")[0]
+														.split(":")[0]
+												}{" "}
+												{
+													formatEpochTime(
+														weatherData?.hourly[4]
+															?.dt
+													).split(" ")[1]
+												}
+											</div>
+										</div>
+									</div>
 								</div>
-								<div className=" bg-p-purple opacity-60 rounded-lg p-4">
+								{/* <div className=" bg-p-purple opacity-60 rounded-lg p-4">
 									asfe
-								</div>
+								</div> */}
 							</div>
 						</div>
 
@@ -225,221 +392,45 @@ function Home({ isDarkMode, weatherData, newsData }) {
 								Forecast
 							</h3>
 							<div className="w-full flex justify-between">
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[0]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[0]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[0]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[0]?.temp?.max}
-										</div>
-									</div>
-								</div>
+								{weatherData.daily.map((item, index) => (
+									<div
+										key={index}
+										className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg"
+									>
+										<h1 className="font-semibold text-sm">
+											{convertEpochToDay(item.dt).slice(
+												0,
+												3
+											)}{" "}
+											{/* Use 'item.dt' instead of 'weatherData?.daily[0]?.dt' */}
+										</h1>
 
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[1]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[1]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[1]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[1]?.temp?.max}
-										</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[2]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[2]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[2]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[2]?.temp?.max}
+										<img
+											src={`http://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+											alt=""
+										/>
+										<p className="text-[1.125rem]">
+											{parseInt(item.temp.day)}
+											<sup className="text-[0.6rem] mt-1">
+												o
+											</sup>
+										</p>
+										<div className="w-full flex justify-between text-[0.75rem]">
+											<div>
+												L: {parseInt(item.temp.min)}
+												<sup className="text-[0.6rem] mt-1">
+													o
+												</sup>{" "}
+											</div>
+											<div>
+												H: {parseInt(item.temp.max)}
+												<sup className="text-[0.6rem] mt-1">
+													o
+												</sup>{" "}
+											</div>
 										</div>
 									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[3]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[3]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[3]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[3]?.temp?.max}
-										</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[4]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[4]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[4]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[4]?.temp?.max}
-										</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[5]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[5]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[5]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[5]?.temp?.max}
-										</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										{convertEpochToDay(
-											weatherData?.daily[6]?.dt
-										)}
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">
-										{weatherData?.daily[6]?.temp?.day}
-									</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>
-											L:{" "}
-											{weatherData?.daily[6]?.temp?.min}
-										</div>
-										<div>
-											H:{" "}
-											{weatherData?.daily[6]?.temp?.max}
-										</div>
-									</div>
-								</div>
-
-								{/* <div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div>
-								<div className="p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div>
-								<div className=" p-6 gap-2 text-p-white bg-p-purple flex flex-col items-center rounded-lg">
-									<h1 className="font-semibold text-sm">
-										Wednesday
-									</h1>
-									<img src={sunsetIcon} alt="" />
-									<p className="text-[1.125rem]">-8</p>
-									<div className="w-full flex justify-between text-[0.75rem]">
-										<div>L: -14</div>
-										<div>H: -7</div>
-									</div>
-								</div> */}
+								))}
 							</div>
 						</section>
 					</div>

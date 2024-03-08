@@ -283,7 +283,7 @@ function App() {
 		// 	);
 		// console.log("newsData", newsDataFile);
 		await fetch(
-			`https://api.thenewsapi.com/v1/news/top?search=weather + ${city}&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=3`
+			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=10`
 		)
 			.then((res) => {
 				return res.json(); // Add return statement here
