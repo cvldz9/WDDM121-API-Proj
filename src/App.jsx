@@ -271,17 +271,6 @@ function App() {
 	};
 
 	const getNewsDetails = async (search, city) => {
-		//setNewsData(newsDataFile);
-		// fetch("http://localhost:5173/newsData.json") // Replace with the actual path to newsData.json
-		// 	.then((response) => response.json())
-		// 	.then((data) => {
-		// 		console.log("news data", data);
-		// 		setNewsData(data);
-		// 	})
-		// 	.catch((error) =>
-		// 		console.error("Error fetching news data:", error)
-		// 	);
-		// console.log("newsData", newsDataFile);
 		await fetch(
 			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=10`
 		)
@@ -298,6 +287,41 @@ function App() {
 				console.log("err", err);
 			});
 	};
+
+	const handleSearchByCity = async (city) => {
+		console.log("search city in App", city);
+		// call the
+		getCoordinates(city);
+
+		//getWeatherDetails();
+	};
+
+	function getCoordinates(cityName) {
+		// Construct the URL for the Geocoding API request
+		const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+			cityName
+		)}&key=AIzaSyDF2K4MVXawaKO0IQONBA5Jc04mBIfbdxE`;
+
+		// Send a GET request to the Geocoding API
+		fetch(apiUrl)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log();
+				// Check if the response contains results
+				if (data.results.length > 0) {
+					// Extract latitude and longitude from the first result
+					const { lat, lng } = data.results[0].geometry.location;
+					console.log(`Latitude: ${lat}, Longitude: ${lng}`);
+					getWeatherDetails(lat, lng);
+					// return { lat: lat, lon: lng };
+				} else {
+					console.error("No results found for the specified city.");
+				}
+			})
+			.catch((error) => {
+				console.error("Error fetching coordinates:", error);
+			});
+	}
 
 	useEffect(() => {
 		userCurrentLocation();
@@ -319,6 +343,7 @@ function App() {
 									weatherData={weatherData}
 									newsData={newsData}
 									isDarkMode={isDarkMode}
+									searchByCity={handleSearchByCity}
 								/>
 							}
 						/>

@@ -4,7 +4,7 @@ import sunsetIcon from "../assets/sunsetIcon.svg";
 import HomeNews from "../components/HomeNews";
 
 import "./Home.css";
-function Home({ isDarkMode, weatherData, newsData }) {
+function Home({ isDarkMode, weatherData, newsData, searchByCity }) {
 	function getCurrentTime() {
 		const now = new Date();
 
@@ -107,6 +107,13 @@ function Home({ isDarkMode, weatherData, newsData }) {
 
 	const currentTime = getCurrentTime();
 	const currentDate = getCurrentDate();
+
+	const handleCityChange = (event) => {
+		event.preventDefault();
+		console.log(event.target.value);
+		// call the function to
+		searchByCity(event.target.value);
+	};
 	return (
 		<>
 			<div className="w-full flex mb-5">
@@ -123,11 +130,31 @@ function Home({ isDarkMode, weatherData, newsData }) {
 						<div className="flex justify-center mb-8">
 							<form action="">
 								<div className="flex justify-between gap-2 w-80 border border-p-grey rounded-full px-6 py-[0.625rem]">
-									<input
+									<select
+										onChange={handleCityChange}
+										className="w-full"
+										name="city"
+										id="search-city"
+									>
+										<option value="Vancouver">
+											Vancouver
+										</option>
+										<option value="Hamilton">
+											Hamilton
+										</option>
+										<option value="Brampton">
+											Brampton
+										</option>
+										<option value="Toronto">Toronto</option>
+										<option value="Mississauga">
+											Mississauga
+										</option>
+									</select>
+									{/* <input
 										className=""
 										type="text"
 										placeholder="Find a city"
-									/>
+									/> */}
 									<img src={pointerPurpleIcon} alt="" />
 								</div>
 							</form>
