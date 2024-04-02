@@ -8,6 +8,8 @@ import FeaturedApi from "./pages/FeaturedApi";
 import Developers from "./pages/Developers";
 import Contact from "./pages/Contact";
 import News from "./pages/News";
+import Login from "./pages/Login";
+
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [weatherData, setWeatherData] = useState(null);
@@ -376,6 +378,11 @@ function App() {
 						<Route
 							path="/test"
 							element={<News isDarkMode={isDarkMode} />}
+						/>
+
+						<Route
+							path="/login"
+							element={<Login isDarkMode={isDarkMode} />}
 						/>
 						
 					</Routes>
