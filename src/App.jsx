@@ -9,6 +9,7 @@ import Developers from "./pages/Developers";
 import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
@@ -383,6 +384,11 @@ function App() {
 						<Route
 							path="/login"
 							element={<Login isDarkMode={isDarkMode} />}
+						/>
+
+						<Route
+							path="/signup"
+							element={<Signup isDarkMode={isDarkMode} />}
 						/>
 						
 					</Routes>
