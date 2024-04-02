@@ -272,7 +272,7 @@ function App() {
 
 	const getNewsDetails = async (search, city) => {
 		await fetch(
-			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=of4Rz5znSeYCy0vW6rgfpbU8M0qo8MDYTvaQhNyc&locale=us&limit=10`
+			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=qf6Ug8BBzLDHB79j4UbluPy6QOEXVHM3dUR5rfv3&locale=us&limit=10`
 		)
 			.then((res) => {
 				return res.json(); // Add return statement here
@@ -377,7 +377,6 @@ function App() {
 							path="/test"
 							element={<News isDarkMode={isDarkMode} />}
 						/>
-						
 					</Routes>
 				</main>
 			</div>
