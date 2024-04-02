@@ -11,14 +11,14 @@ function Nav({ isDarkMode }) {
 		<>
 			<div className="flex flex-col items-center justify-between text-p-white px-2 py-4 shadow-lg">
 				<div className="">
-					<a href="/">
-						<div className="flex flex-col items-center h-56">
-							<img src={Logo} alt="" />
-						</div>
-					</a>
-
-					<div className="flex flex-col items-center gap-16">
+					<div className="flex flex-col items-center h-56">
 						<a href="/">
+							<img src={Logo} alt="" />
+						</a>
+					</div>
+
+					<div className="flex flex-col items-center gap-12">
+						<a href="/home">
 							<img src={HomeIcon} alt="" />
 						</a>
 						<a href="/about">
@@ -31,6 +31,14 @@ function Nav({ isDarkMode }) {
 
 						<a href="/contact">
 							<img src={PhoneIcon} alt="" />
+						</a>
+
+						<a href="/" title="Login">
+							<img src={FeturedAPI} alt="" />
+						</a>
+
+						<a href="/signup" title="Signup">
+							<img src={FeturedAPI} alt="" />
 						</a>
 						<a href="/featured-api">
 							<img src={FeturedAPI} alt="" />

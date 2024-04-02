@@ -150,7 +150,7 @@ function App() {
 	return (
 		<>
 			<div className="flex w-screen bg-p-white h-screen">
-				<aside className="flex w-[3.75rem] bg-p-black">
+				<aside className="flex w-[3.75rem] h-full bg-p-black">
 					<Nav isDarkMode={isDarkMode}></Nav>
 				</aside>
 				<main className="flex w-full h-dvh">
