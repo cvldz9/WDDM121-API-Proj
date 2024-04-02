@@ -197,7 +197,7 @@ function Contact({ isDarkMode }) {
 								type="submit"
 								className="block w-full rounded-md letstalk px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:border-transparent"
 							>
-								Let's talk
+								Send Message
 							</button>
 						</div>
 					</form>
