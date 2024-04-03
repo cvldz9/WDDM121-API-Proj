@@ -4,10 +4,10 @@ function Contact({ isDarkMode }) {
 	return (
 		<>
 			<div className="flex flex-col items-center h-screen overflow-y-auto">
-				<h3 className="text-center pb-8 pt-10 px-20 text-2xl self-center font-bold">
+				<h3 className="text-center pb-8 pt-10 px-20 text-4xl self-center font-bold">
 					Contact
 				</h3>
-				<div className="flex justify-center pb-8">
+				<div className="flex justify-center">
 					<p className="contact-paragraph text-center">
 						Reach out to us today and let's start a conversation.
 						Whether you have questions, feedback, or simply want to
@@ -17,7 +17,7 @@ function Contact({ isDarkMode }) {
 					</p>
 				</div>
 
-				<div className="isolate bg-white px-6 py-4 sm:py-1 lg:px-8">
+				<div className="isolate bg-white px-6 pb-4 sm:py-1 lg:px-8">
 					{/* <div
 						className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
 						aria-hidden="true"
@@ -37,7 +37,7 @@ function Contact({ isDarkMode }) {
 					<form
 						action="#"
 						method="POST"
-						className="mx-auto mt-5 max-w-xl sm:mt-20 border-p-grey p-5 rounded shadow-lg"
+						className="mx-auto mt-5 max-w-xl border-p-grey p-5 rounded shadow-lg"
 					>
 						<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 							<div>
