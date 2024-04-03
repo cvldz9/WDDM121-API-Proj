@@ -127,7 +127,7 @@ function Home({ isDarkMode, weatherData, newsData, searchByCity }) {
 
 	const handleCityChange = (event) => {
 		event.preventDefault();
-		console.log(event.target.value);
+		// console.log(event.target.value);
 		// call the function to
 		searchByCity(event.target.value);
 	};
