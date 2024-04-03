@@ -105,6 +105,23 @@ function Home({ isDarkMode, weatherData, newsData, searchByCity }) {
 		return formattedTime;
 	}
 
+	const greetUser = () => {
+		const currentTime = new Date();
+		const currentHour = currentTime.getHours();
+
+		let greeting;
+
+		if (currentHour >= 5 && currentHour < 12) {
+			greeting = "morning";
+		} else if (currentHour >= 12 && currentHour < 18) {
+			greeting = "afternoon";
+		} else {
+			greeting = "evening";
+		}
+
+		return greeting;
+	};
+
 	const currentTime = getCurrentTime();
 	const currentDate = getCurrentDate();
 
@@ -123,7 +140,9 @@ function Home({ isDarkMode, weatherData, newsData, searchByCity }) {
 				{weatherData && (
 					<div className="w-full flex flex-col px-7 pt-9 overflow-y-auto">
 						<div className="flex justify-between mb-3">
-							<h3 className=" text-2xl">Hello, good morning</h3>
+							<h3 className=" text-2xl">
+								Hello, good {greetUser()}
+							</h3>
 							<h6>{currentDate}</h6>
 						</div>
 						{/* Search box */}
