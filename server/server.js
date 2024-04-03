@@ -24,11 +24,91 @@ const firebaseConfig = {
 // Initialize Firebase
 const firebase = initializeApp(firebaseConfig);
 
-console.log("firebase init");
+//Authentication
+//Init authentication from Firebase console
+// const auth = firebase.auth();
+
+// const signUp = (email, password) => {
+// 	//Allow us to sign up
+// 	// const email = document.getElementById("email").value;
+// 	// const password = document.getElementById("password").value;
+// 	console.log(email, password);
+
+// 	firebase
+// 		.auth()
+// 		.createUserWithEmailAndPassword(email, password)
+// 		.then((result) => {
+// 			//If successfully created user
+// 			document.write("You are Signed Up");
+// 			console.log(result);
+// 		})
+// 		.catch((error) => {
+// 			//If unsuccessfully created user
+// 			console.log(error.code);
+// 			console.log(error.message);
+// 		});
+// };
+
+// const signIn = (email, password) => {
+// 	//Allow us to sign in
+// 	const email = req.body.email;
+// 	const password = req.body.password;
+// 	firebase
+// 		.auth()
+// 		.signInWithEmailAndPassword(email, password)
+// 		.then((result) => {
+// 			//Signed IN
+// 			document.write("You are Signed In");
+// 			console.log(result);
+// 		})
+// 		.catch((error) => {
+// 			console.log(error.code);
+// 			console.log(error.message);
+// 		});
+// };
 
 // Define routes
-app.get("/login", (req, res) => {
-	res.send({ title: "Welcome to Upload!" });
+app.post("/login", (req, res) => {
+	const email = req.body.email;
+	const password = req.body.password;
+
+	// authenticate
+	firebase
+		.auth()
+		.signInWithEmailAndPassword(email, password)
+		.then((result) => {
+			//Signed IN
+			document.write("You are Signed In");
+			console.log(result);
+			res.status(200).send({ code: 200, message: result });
+		})
+		.catch((error) => {
+			console.log(error.code);
+			console.log(error.message);
+			res.status(400).send({ code: error.code, message: error.message });
+		});
+});
+
+app.post("/signup", (req, res) => {
+	const email = req.body.email;
+	const password = req.body.password;
+
+	// authenticate add the user
+	firebase
+		.auth()
+		.createUserWithEmailAndPassword(email, password)
+		.then((result) => {
+			//If successfully created user
+			document.write("You are Signed Up");
+			console.log(result);
+			res.status(200).send({ code: 200, message: result });
+		})
+		.catch((error) => {
+			//If unsuccessfully created user
+			console.log(error.code);
+			console.log(error.message);
+			res.status(400).send({ code: error.code, message: error.message });
+		});
 });
 
 app.listen(PORT, () => {
