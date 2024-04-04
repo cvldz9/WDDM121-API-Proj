@@ -45,6 +45,8 @@ function Login({ isDarkMode }) {
 				}
 				if (data.success === 1) {
 					setSuccessMessage(data.message);
+					// save token in the local storage
+					localStorage.setItem("wapp", data.token);
 					redirectToHome();
 				}
 			})
@@ -104,6 +106,7 @@ function Login({ isDarkMode }) {
 	const redirectToHome = () => {
 		// setTimeout(() => {
 		setErrorMessage("");
+
 		navigate("/home");
 		// }, 3000);
 	};
