@@ -83,7 +83,7 @@ function App() {
 				setWeatherData(data);
 				console.log("data timezone", weatherData?.timezone);
 
-				getNewsDetails("weather", weatherData?.timezone?.split("/")[1]);
+				// getNewsDetails("weather", weatherData?.timezone?.split("/")[1]);
 			})
 			.catch((err) => {
 				console.log("err", err);

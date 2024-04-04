@@ -1,13 +1,20 @@
 import { Link } from "react-router-dom";
 import Logo from "../assets/logo.svg";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// import firebase from "firebase/app";
+// import "firebase/auth";
 
 function Login({ isDarkMode }) {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
 	});
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
 
+	const navigate = useNavigate();
 	// Function to handle input change
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -18,26 +25,67 @@ function Login({ isDarkMode }) {
 	};
 	// get user filled details and call the backend endpoint to login the user in
 	const loginUser = async (email, password) => {
-		try {
-			const response = await fetch("http://localhost:3000/api/login", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify(formData), // Send data in the body as JSON string
+		setErrorMessage("");
+		await fetch(`http://localhost:3000/api/login`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData), // Send data in the body as JSON string
+		})
+			.then((res) => {
+				return res.json(); // Add return statement here
+			})
+			.then((data) => {
+				console.log("data", data.message);
+				if (data.success === 0) {
+					setErrorMessage(data.message);
+					console.log("errorMessage", errorMessage);
+					clearError();
+				}
+				if (data.success === 1) {
+					setSuccessMessage(data.message);
+					redirectToHome();
+				}
+			})
+			.catch((err) => {
+				console.log("err", err);
+				setErrorMessage(err.method);
 			});
-			if (!response.ok) {
-				throw new Error("Network response was not ok");
-			}
-			const data = await response.json();
-			console.log("data", data);
-			// Do something with the response data
-		} catch (error) {
-			console.error(
-				"There was a problem with the fetch operation:",
-				error
-			);
-		}
+		//Authentication
+		//Init authentication from Firebase console
+		// const auth = firebase.auth();
+		// auth.signInWithEmailAndPassword(email, password)
+		// 	.then((result) => {
+		// 		//Signed IN
+		// 		// document.write("You are Signed In");
+		// 		console.log(result);
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log(error.code);
+		// 		console.log(error.message);
+		// 	});
+		// try {
+
+		// 	const response = await fetch("http://localhost:3000/api/login", {
+		// 		method: "POST",
+		// 		headers: {
+		// 			"Content-Type": "application/json",
+		// 		},
+		// 		body: JSON.stringify(formData), // Send data in the body as JSON string
+		// 	});
+		// 	if (!response.ok) {
+		// 		throw new Error("Network response was not ok");
+		// 	}
+		// 	const data = await response.json();
+		// 	console.log("data", data);
+		// 	// Do something with the response data
+		// } catch (error) {
+		// 	console.error(
+		// 		"There was a problem with the fetch operation:",
+		// 		error
+		// 	);
+		// }
 	};
 
 	const handleLogin = (event) => {
@@ -46,6 +94,18 @@ function Login({ isDarkMode }) {
 		console.log("Form data:", formData);
 		// Call your login function or API here
 		loginUser(formData);
+	};
+	const clearError = () => {
+		setTimeout(() => {
+			setErrorMessage("");
+		}, 3000);
+	};
+
+	const redirectToHome = () => {
+		// setTimeout(() => {
+		setErrorMessage("");
+		navigate("/home");
+		// }, 3000);
 	};
 
 	useEffect(() => {
@@ -67,6 +127,16 @@ function Login({ isDarkMode }) {
 
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 					<form className="space-y-6">
+						{errorMessage && (
+							<div className=" bg-p-tomato text-p-white p-3 w-full flex justify-center">
+								{errorMessage}
+							</div>
+						)}
+						{successMessage && (
+							<div className=" bg-p-green text-p-white p-3 w-full flex justify-center">
+								{successMessage}
+							</div>
+						)}
 						<div>
 							<label
 								htmlFor="email"

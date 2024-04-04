@@ -13,15 +13,24 @@ app.use(cors());
 // Use body-parser middleware to parse JSON
 app.use(bodyParser.json());
 
-// Import the functions you need from the SDKs you need
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+// const firebaseConfig = {
+// 	apiKey: "AIzaSyC2c9CvPxPHLw3ciHS7oNQRHf-XGhGMDqI",
+// 	authDomain: "wddm121-50c69.firebaseapp.com",
+// 	databaseURL: "https://wddm121-50c69-default-rtdb.firebaseio.com",
+// 	projectId: "wddm121-50c69",
+// 	storageBucket: "wddm121-50c69.appspot.com",
+// 	messagingSenderId: "800322405328",
+// 	appId: "1:800322405328:web:25a5ab4d05bfa3b0ceafd5",
+// 	measurementId: "G-B9FL2B0PYQ",
+// };
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-//
+// // Initialize Firebase
+// const appDB = initializeApp(firebaseConfig);
+// const appAuth = appDB.auth();
 
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+//Authentication
+//Init authentication from Firebase console
+// const auth = firebaseApp.auth();
 
 admin.initializeApp({
 	credential: admin.credential.cert(serviceAccount),
@@ -29,27 +38,62 @@ admin.initializeApp({
 });
 
 // Firebase Auth instance
-const auth = admin.auth();
+const adminAuth = admin.auth();
 
-console.log("auth...", auth);
+// console.log("auth...", auth);
 // Define routes
 app.post("/api/login", async (req, res) => {
 	const { email, password } = req.body;
 	console.log("body data", req.body);
 	// authenticate
 	try {
-		// Authenticate user with Firebase Auth
-		const userCredential = await auth.getUserByEmail(email);
-		const user = userCredential.user;
-		console.log("Successfully signed in:", user.uid);
+		// Perform login using Firebase Authentication
+		const userCredential = await admin.auth().getUserByEmail(email);
+		if (!userCredential) {
+			return res.status(401).json({ error: "User not found" });
+		}
+
+		const uid = userCredential.uid;
+		const token = await admin.auth().createCustomToken(uid); // This step is optional, used for generating custom tokens
 		res.status(200).json({
-			message: "Successfully signed in",
-			uid: user.uid,
+			message: "Login successful",
+			uid: uid,
+			token,
+			success: 1,
 		});
+		// 	message: "Login successful",
+		// const userCredential = await appAuth.signInWithEmailAndPassword(
+		// 	email,
+		// 	password
+		// );
+		// console.log("userCredentials", userCredential);
+		// const uid = userCredential.user.uid;
+
+		// res.status(200).json({
+		// 	message: "Login successful",
+		// 	uid: uid,
+		// });
 	} catch (error) {
-		console.error("Error signing in:", error);
-		res.status(401).json({ message: "Unauthorized" });
+		console.error("Error logging in:", error);
+		res.status(400).json({
+			message: error.errorInfo.message,
+			code: error.errorInfo.code,
+			success: 0,
+		});
 	}
+	// try {
+	// 	// Authenticate user with Firebase Auth
+	// 	const userCredential = await auth.getUserByEmail(email);
+	// 	const user = userCredential.user;
+	// 	console.log("Successfully signed in:", user.uid);
+	// 	res.status(200).json({
+	// 		message: "Successfully signed in",
+	// 		uid: user.uid,
+	// 	});
+	// } catch (error) {
+	// 	console.error("Error signing in:", error);
+	// 	res.status(401).json({ message: "Unauthorized" });
+	// }
 });
 
 app.post("/api/signup", async (req, res) => {
@@ -58,7 +102,7 @@ app.post("/api/signup", async (req, res) => {
 	// signup
 	try {
 		// Signup user with Firebase Auth
-		const userRecord = await auth.createUser({
+		const userRecord = await adminAuth.createUser({
 			email,
 			password,
 		});
