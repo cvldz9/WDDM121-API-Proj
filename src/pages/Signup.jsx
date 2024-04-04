@@ -109,12 +109,12 @@ function SignUp({ isDarkMode }) {
 					<div className="mt-6 border-t border-gray-200 pt-6">
 						<p className="text-center text-sm text-gray-500">
 							Already have an account?{" "}
-							<a
-								href="/login"
+							<Link
+								to="/"
 								className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
 							>
 								Sign In
-							</a>
+							</Link>
 						</p>
 					</div>
 				</div>

@@ -6,6 +6,7 @@ import LoginIcon from "../assets/icons8-login-50.png";
 import SignupIcon from "../assets/icons8-add-user-48.png";
 import FeturedAPI from "../assets/icons8-api-48.png";
 import FcAbout from "../assets/icons8-about-50.png";
+import { Link } from "react-router-dom";
 import "./Nav.css";
 
 function Nav({ isDarkMode }) {
@@ -14,38 +15,38 @@ function Nav({ isDarkMode }) {
 			<div className="flex flex-col items-center justify-between text-p-white px-2 py-4 shadow-lg">
 				<div className="">
 					<div className="flex flex-col items-center h-32">
-						<a href="/">
+						<Link to="/">
 							<img src={Logo} alt="" />
-						</a>
+						</Link>
 					</div>
 
 					<div className="flex flex-col items-center gap-12 link-wrap">
-						<a href="/home" title="Home">
+						<Link to="/home" title="Home">
 							<img src={HomeIcon} alt="" />
-						</a>
-						<a href="/about" title="Acout Us">
+						</Link>
+						<Link to="/about" title="Acout Us">
 							{/* <FcAbout /> */}
 							<img src={FcAbout} alt="" />
-						</a>
-						<a href="/developers" title="Developers">
+						</Link>
+						<Link to="/developers" title="Developers">
 							<img src={UsersIcon} alt="" />
-						</a>
+						</Link>
 
-						<a href="/contact" title="Contact Us">
+						<Link to="/contact" title="Contact Us">
 							<img src={PhoneIcon} alt="" />
-						</a>
+						</Link>
 
-						<a href="/featured-api">
+						<Link to="/featured-api">
 							<img src={FeturedAPI} alt="" />
-						</a>
+						</Link>
 
-						<a href="/" title="Login">
+						<Link to="/" title="Login">
 							<img src={LoginIcon} alt="" />
-						</a>
+						</Link>
 
-						<a href="/signup" title="Signup">
+						<Link to="/signup" title="Signup">
 							<img src={SignupIcon} alt="" />
-						</a>
+						</Link>
 					</div>
 				</div>
 				<div className="flex justify-center mb-4">
