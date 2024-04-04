@@ -49,8 +49,7 @@ function Login({ isDarkMode }) {
 	};
 
 	useEffect(() => {
-		loginUser();
-		// getNewsDetails("weather", "city");
+		loginUser;
 	}, []);
 	return (
 		<>

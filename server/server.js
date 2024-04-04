@@ -39,10 +39,7 @@ app.post("/api/login", async (req, res) => {
 	// authenticate
 	try {
 		// Authenticate user with Firebase Auth
-		const userCredential = await auth.signInWithEmailAndPassword(
-			email,
-			password
-		);
+		const userCredential = await auth.getUserByEmail(email);
 		const user = userCredential.user;
 		console.log("Successfully signed in:", user.uid);
 		res.status(200).json({
@@ -61,19 +58,25 @@ app.post("/api/signup", async (req, res) => {
 	// signup
 	try {
 		// Signup user with Firebase Auth
-		const userCredential = await auth.createUserWithEmailAndPassword(
+		const userRecord = await auth.createUser({
 			email,
-			password
-		);
-		const user = userCredential.user;
-		console.log("Successfully created user:", user.uid);
+			password,
+		});
+
+		// const user = userCredential.user;
+		console.log("Successfully created user:", userRecord);
 		res.status(200).json({
-			message: "Successfully registered",
-			uid: user.uid,
+			message: "You have successfully registered",
+			uid: userRecord.uid,
+			success: 1,
 		});
 	} catch (error) {
 		console.error("Error signing up:", error);
-		res.status(400).json({ message: "User registration failed" });
+		res.status(400).json({
+			message: error.errorInfo.message,
+			code: error.errorInfo.code,
+			success: 0,
+		});
 	}
 	// authenticate add the user
 	// firebaseAuth
