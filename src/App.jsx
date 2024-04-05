@@ -10,14 +10,19 @@ import Contact from "./pages/Contact";
 import News from "./pages/News";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import { useNavigate } from "react-router-dom";
 
 function App() {
 	const [isDarkMode, setIsDarkMode] = useState(false);
 	const [weatherData, setWeatherData] = useState(null);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
+	const [toggleState, setToggleState] = useState(false);
 	const [newsData, setNewsData] = useState(null);
 
+	const navigate = useNavigate();
+	// checkAuth();
 	const userCurrentLocation = async () => {
+		// checkAuth();
 		// Check if geolocation is supported by the browser
 		if ("geolocation" in navigator) {
 			// Get the current position
@@ -30,15 +35,6 @@ function App() {
 
 					//call the weather api to the weather details for that location
 					await getWeatherDetails(latitude, longitude);
-
-					// get the city
-					// if (weatherDataRes != null || weatherDataRes != undefined) {
-					// 	const { timezone } = weatherDataRes;
-					// }
-
-					// Print or use latitude and longitude as needed
-					console.log("Latitude:", latitude);
-					console.log("Longitude:", longitude);
 				},
 				function (error) {
 					// Handle errors
@@ -80,40 +76,60 @@ function App() {
 			.then((data) => {
 				console.log("data", data);
 				// const { timezone } = data;
-				setWeatherData(data);
-				console.log("data timezone", weatherData?.timezone);
 
-				// getNewsDetails("weather", weatherData?.timezone?.split("/")[1]);
+				setWeatherData(data);
+				// console.log("data timezone", weatherData?.timezone);
+
+				getNewsDetails("weather", weatherData?.timezone?.split("/")[1]);
 			})
 			.catch((err) => {
 				console.log("err", err);
+				setWeatherData(null);
 			});
 	};
 
 	const getNewsDetails = async (search, city) => {
 		await fetch(
-			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=qf6Ug8BBzLDHB79j4UbluPy6QOEXVHM3dUR5rfv3&locale=us&limit=10`
+			`https://api.thenewsapi.com/v1/news/top?search=${city}&api_token=IwI9nWjYee3gnutDIYRZqyUAPc2Y2QvU6My2gHG1&locale=us&limit=10`
 		)
 			.then((res) => {
 				return res.json(); // Add return statement here
 			})
 			.then((data) => {
 				console.log("news data", data);
+				console.log("news data error", data.error);
+				if (data.error.code === "usage_limit_reached") {
+					setNewsData(null);
+				} else {
+					setNewsData(data);
+				}
 				// const { timezone } = data;
-				setNewsData(data);
-				console.log("data news", newsData);
+				// console.log("data news", newsData);
 			})
 			.catch((err) => {
 				console.log("err", err);
+				setNewsData(null);
 			});
 	};
 
 	const handleSearchByCity = async (city) => {
-		console.log("search city in App", city);
+		// console.log("search city in App", city);
 		// call the
 		getCoordinates(city);
+	};
 
-		//getWeatherDetails();
+	const handleUserLogin = (data) => {
+		// console.log("userLogin", data);
+		if (data) {
+			setIsAuthenticated(true);
+		}
+	};
+
+	const handleUserLogout = (data) => {
+		// console.log("userLogout", data);
+		if (data) {
+			setIsAuthenticated(false);
+		}
 	};
 
 	function getCoordinates(cityName) {
@@ -141,8 +157,26 @@ function App() {
 				console.error("Error fetching coordinates:", error);
 			});
 	}
+	const checkAuth = () => {
+		// get localSortage
+		const token = localStorage.getItem("wapp");
+		console.log("token from localStorage", token);
+		// set isAuthenticated = true is the token is in localStorage
+		if (token != null && token != "") {
+			// console.log("user is authenticated");
+			setIsAuthenticated(true);
+		} else {
+			// if (!isAuthenticated) {
+			console.log("user is not authenticated");
+			// setIsAuthenticated(true);
+			setIsAuthenticated(false);
+			navigate("/");
+			// }
+		}
+	};
 
 	useEffect(() => {
+		checkAuth();
 		userCurrentLocation();
 		// getNewsDetails("weather", "city");
 	}, []);
@@ -151,13 +185,22 @@ function App() {
 		<>
 			<div className="flex w-screen bg-p-white h-screen">
 				<aside className="flex w-[3.75rem] h-full bg-p-black">
-					<Nav isDarkMode={isDarkMode}></Nav>
+					<Nav
+						isDarkMode={isDarkMode}
+						isAuthenticated={isAuthenticated}
+						userLogout={handleUserLogout}
+					></Nav>
 				</aside>
 				<main className="flex w-full h-dvh">
 					<Routes>
 						<Route
 							path="/"
-							element={<Login isDarkMode={isDarkMode} />}
+							element={
+								<Login
+									isDarkMode={isDarkMode}
+									userLogin={handleUserLogin}
+								/>
+							}
 						/>
 
 						<Route

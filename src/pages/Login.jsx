@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 // import firebase from "firebase/app";
 // import "firebase/auth";
 
-function Login({ isDarkMode }) {
+function Login({ isDarkMode, userLogin }) {
 	const [formData, setFormData] = useState({
 		email: "",
 		password: "",
@@ -23,6 +23,7 @@ function Login({ isDarkMode }) {
 			[name]: value,
 		});
 	};
+
 	// get user filled details and call the backend endpoint to login the user in
 	const loginUser = async (email, password) => {
 		setErrorMessage("");
@@ -47,6 +48,7 @@ function Login({ isDarkMode }) {
 					setSuccessMessage(data.message);
 					// save token in the local storage
 					localStorage.setItem("wapp", data.token);
+					userLogin(true);
 					redirectToHome();
 				}
 			})
@@ -54,46 +56,12 @@ function Login({ isDarkMode }) {
 				console.log("err", err);
 				setErrorMessage(err.method);
 			});
-		//Authentication
-		//Init authentication from Firebase console
-		// const auth = firebase.auth();
-		// auth.signInWithEmailAndPassword(email, password)
-		// 	.then((result) => {
-		// 		//Signed IN
-		// 		// document.write("You are Signed In");
-		// 		console.log(result);
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log(error.code);
-		// 		console.log(error.message);
-		// 	});
-		// try {
-
-		// 	const response = await fetch("http://localhost:3000/api/login", {
-		// 		method: "POST",
-		// 		headers: {
-		// 			"Content-Type": "application/json",
-		// 		},
-		// 		body: JSON.stringify(formData), // Send data in the body as JSON string
-		// 	});
-		// 	if (!response.ok) {
-		// 		throw new Error("Network response was not ok");
-		// 	}
-		// 	const data = await response.json();
-		// 	console.log("data", data);
-		// 	// Do something with the response data
-		// } catch (error) {
-		// 	console.error(
-		// 		"There was a problem with the fetch operation:",
-		// 		error
-		// 	);
-		// }
 	};
 
 	const handleLogin = (event) => {
 		event.preventDefault();
 		// Access form values from formData state
-		console.log("Form data:", formData);
+		// console.log("Form data:", formData);
 		// Call your login function or API here
 		loginUser(formData);
 	};
@@ -106,7 +74,7 @@ function Login({ isDarkMode }) {
 	const redirectToHome = () => {
 		// setTimeout(() => {
 		setErrorMessage("");
-
+		// window.location.href("/home");
 		navigate("/home");
 		// }, 3000);
 	};

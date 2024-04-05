@@ -5,6 +5,7 @@ function HomeNews({ newsData }) {
 		<>
 			<div className="flex flex-col gap-2 w-[27.313rem] px-3 py-4 overflow-y-auto h-dvh bg-p-grey">
 				{/* Breaking News */}
+				{newsData == null ? "" : newsData}
 				{!newsData && "Loading News Data"}
 
 				{newsData && (

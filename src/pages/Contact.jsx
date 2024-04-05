@@ -1,6 +1,85 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Contact.css";
 
 function Contact({ isDarkMode }) {
+	const [formData, setFormData] = useState({
+		firstName: "",
+		lastName: "",
+		email: "",
+		message: "",
+	});
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setFormData({
+			...formData,
+			[name]: value,
+		});
+	};
+
+	const submitContact = async (email, password) => {
+		setErrorMessage("");
+		await fetch(`http://localhost:3000/api/contact`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(formData), // Send data in the body as JSON string
+		})
+			.then((res) => {
+				return res.json(); // Add return statement here
+			})
+			.then((data) => {
+				console.log("data", data.message);
+				if (data.success === 0) {
+					setErrorMessage(data.message);
+					console.log("errorMessage", errorMessage);
+					clearError();
+				}
+				if (data.success === 1) {
+					setSuccessMessage(data.message);
+					// save token in the local storage
+					// localStorage.setItem("wapp", data.token);
+					showSuccess();
+				}
+			})
+			.catch((err) => {
+				console.log("err", err);
+				setErrorMessage(err.method);
+			});
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		// Access form values from formData state
+		console.log("Form data:", formData);
+		// Call your login function or API here
+		submitContact(formData);
+	};
+	const clearError = () => {
+		setTimeout(() => {
+			setErrorMessage("");
+		}, 3000);
+	};
+
+	const showSuccess = () => {
+		setTimeout(() => {
+			setSuccessMessage("");
+			setFormData({
+				firstName: "",
+				lastName: "",
+				email: "",
+				message: "",
+			});
+		}, 3000);
+	};
+
+	useEffect(() => {
+		submitContact;
+	}, []);
 	return (
 		<>
 			<div className="flex flex-col items-center h-screen overflow-y-auto">
@@ -18,27 +97,17 @@ function Contact({ isDarkMode }) {
 				</div>
 
 				<div className="isolate bg-white px-6 pb-4 sm:py-1 lg:px-8">
-					{/* <div
-						className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]"
-						aria-hidden="true"
-					>
-						<div
-							className="relative left-1/2 -z-10 aspect-[1155/678] w-[36.125rem] max-w-none -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-40rem)] sm:w-[72.1875rem]"
-							style={{
-								clipPath:
-									"polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-							}}
-						></div>
-					</div> */}
-					{/* <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Contact sales</h2>
-            <p className="mt-2 text-lg leading-8 text-gray-600">Aute magna irure deserunt veniam aliqua magna enim voluptate.</p>
-          </div> */}
-					<form
-						action="#"
-						method="POST"
-						className="mx-auto mt-5 max-w-xl border-p-grey p-5 rounded shadow-lg"
-					>
+					<form className="mx-auto mt-5 max-w-xl border-p-grey p-5 rounded shadow-lg">
+						{errorMessage && (
+							<div className=" bg-p-tomato text-p-white p-3 w-full flex justify-center mb-5">
+								{errorMessage}
+							</div>
+						)}
+						{successMessage && (
+							<div className=" bg-p-green text-p-white p-3 w-full flex justify-center mb-5">
+								{successMessage}
+							</div>
+						)}
 						<div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
 							<div>
 								<label
@@ -50,8 +119,10 @@ function Contact({ isDarkMode }) {
 								<div className="mt-2.5">
 									<input
 										type="text"
-										name="first-name"
+										name="firstName"
 										id="first-name"
+										value={formData.firstName}
+										onChange={handleInputChange}
 										autoComplete="given-name"
 										className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									/>
@@ -67,7 +138,9 @@ function Contact({ isDarkMode }) {
 								<div className="mt-2.5">
 									<input
 										type="text"
-										name="last-name"
+										name="lastName"
+										value={formData.lastName}
+										onChange={handleInputChange}
 										id="last-name"
 										autoComplete="family-name"
 										className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -92,6 +165,8 @@ function Contact({ isDarkMode }) {
 										type="email"
 										name="email"
 										id="email"
+										value={formData.email}
+										onChange={handleInputChange}
 										autoComplete="email"
 										className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									/>
@@ -154,12 +229,14 @@ function Contact({ isDarkMode }) {
 									<textarea
 										name="message"
 										id="message"
+										value={formData.message}
+										onChange={handleInputChange}
 										rows="4"
 										className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
 									></textarea>
 								</div>
 							</div>
-							<div className="flex gap-x-4 sm:col-span-2">
+							{/* <div className="flex gap-x-4 sm:col-span-2">
 								<div className="flex h-6 items-center">
 									<button
 										type="button"
@@ -190,10 +267,11 @@ function Contact({ isDarkMode }) {
 									</a>
 									.
 								</label>
-							</div>
+							</div> */}
 						</div>
 						<div className="mt-10">
 							<button
+								onClick={handleSubmit}
 								type="submit"
 								className="block w-full rounded-md letstalk px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-600 focus-visible:border-transparent"
 							>

@@ -122,22 +122,43 @@ app.post("/api/signup", async (req, res) => {
 			success: 0,
 		});
 	}
-	// authenticate add the user
-	// firebaseAuth
-	// 	.auth()
-	// 	.createUserWithEmailAndPassword(email, password)
-	// 	.then((result) => {
-	// 		//If successfully created user
-	// 		document.write("You are Signed Up");
-	// 		console.log(result);
-	// 		res.status(200).send({ code: 200, message: result });
-	// 	})
-	// 	.catch((error) => {
-	// 		//If unsuccessfully created user
-	// 		console.log(error.code);
-	// 		console.log(error.message);
-	// 		res.status(400).send({ code: error.code, message: error.message });
-	// 	});
+});
+
+app.post("/api/contact", async (req, res) => {
+	// const { email, password } = req.body;
+	console.log("body data", req.body);
+	// authenticate
+	try {
+		// Perform login using Firebase Authentication
+		const { firstName, lastName, email, message } = req.body;
+		if (!firstName || !lastName || !email || !message) {
+			return res.status(400).json({
+				message: "All fields are required",
+				success: 0,
+			});
+		}
+
+		// Store contact information in Firebase Realtime Database
+		const contactRef = admin.database().ref("contacts").push();
+		await contactRef.set({
+			firstName,
+			lastName,
+			email,
+			message,
+		});
+
+		res.status(200).json({
+			message: "Thank you for reaching out. We will get back to you soon",
+			success: 1,
+		});
+	} catch (error) {
+		console.error("Error logging in:", error);
+		res.status(400).json({
+			message: error.errorInfo.message,
+			code: error.errorInfo.code,
+			success: 0,
+		});
+	}
 });
 
 app.listen(PORT, () => {
