@@ -8,6 +8,9 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+server/wddm121-50c69-firebase-adminsdk-xmt0s-0c518b1adc.json
+PROJECT1_WEBSITE_GROUP4.zip
+PROJECT2-GROUP4.zip
 dist
 dist-ssr
 *.local
