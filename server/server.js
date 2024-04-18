@@ -1,9 +1,11 @@
 const express = require("express");
 const { initializeApp } = require("firebase/app");
 const bodyParser = require("body-parser");
+const multer = require("multer");
 const cors = require("cors");
 const admin = require("firebase-admin");
 const serviceAccount = require("./wddm121-50c69-firebase-adminsdk-xmt0s-0c518b1adc.json");
+const upload = multer();
 
 const app = express();
 const PORT = 3000;
@@ -13,6 +15,8 @@ app.use(cors());
 // Use body-parser middleware to parse JSON
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded form data
+// Use multer middleware to handle form data
+app.use(upload.any());
 
 // const firebaseConfig = {
 // 	apiKey: "AIzaSyC2c9CvPxPHLw3ciHS7oNQRHf-XGhGMDqI",
@@ -164,9 +168,10 @@ app.post("/api/contact", async (req, res) => {
 
 app.post("/api/add-developer", async (req, res) => {
 	try {
-		console.log("add dev", req.body);
-		const { name, description, image } = req.body;
-		if (!name || !description || !image) {
+		console.log("add dev", req.files);
+		const images = req.files;
+		const { name, description } = req.body;
+		if (!name || !description || !images) {
 			return res.status(400).json({
 				message: "All fields are required",
 				success: 0,
@@ -178,7 +183,7 @@ app.post("/api/add-developer", async (req, res) => {
 		await developerRef.set({
 			name,
 			description,
-			image,
+			images,
 		});
 
 		res.status(200).json({
