@@ -12,6 +12,7 @@ const PORT = 3000;
 app.use(cors());
 // Use body-parser middleware to parse JSON
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded form data
 
 // const firebaseConfig = {
 // 	apiKey: "AIzaSyC2c9CvPxPHLw3ciHS7oNQRHf-XGhGMDqI",
@@ -156,6 +157,74 @@ app.post("/api/contact", async (req, res) => {
 		res.status(400).json({
 			message: error.errorInfo.message,
 			code: error.errorInfo.code,
+			success: 0,
+		});
+	}
+});
+
+app.post("/api/add-developer", async (req, res) => {
+	try {
+		console.log("add dev", req.body);
+		const { name, description, image } = req.body;
+		if (!name || !description || !image) {
+			return res.status(400).json({
+				message: "All fields are required",
+				success: 0,
+			});
+		}
+
+		// Store developer information in Firebase Realtime Database
+		const developerRef = admin.database().ref("developers").push();
+		await developerRef.set({
+			name,
+			description,
+			image,
+		});
+
+		res.status(200).json({
+			message: "Developer information stored successfully",
+			success: 1,
+		});
+	} catch (error) {
+		console.error("Error storing developer information:", error);
+		res.status(500).json({
+			message: "Failed to store developer information",
+			success: 0,
+		});
+	}
+});
+
+app.get("/api/developers", async (req, res) => {
+	try {
+		// Retrieve all developers from Firebase Realtime Database
+		const developersSnapshot = await admin
+			.database()
+			.ref("developers")
+			.once("value");
+		const developers = developersSnapshot.val();
+
+		// Check if developers exist
+		if (!developers) {
+			return res.status(404).json({
+				message: "No developers found",
+				success: 0,
+			});
+		}
+
+		// Convert developers object to an array
+		const developersArray = Object.keys(developers).map((key) => ({
+			id: key,
+			...developers[key],
+		}));
+
+		res.status(200).json({
+			developers: developersArray,
+			success: 1,
+		});
+	} catch (error) {
+		console.error("Error retrieving developers:", error);
+		res.status(500).json({
+			message: "Failed to retrieve developers",
 			success: 0,
 		});
 	}
