@@ -168,7 +168,7 @@ app.post("/api/contact", async (req, res) => {
 
 app.post("/api/add-developer", async (req, res) => {
 	try {
-		console.log("add dev", req.files);
+		// console.log("add dev", req.files);
 		const images = req.files;
 		const { name, description } = req.body;
 		if (!name || !description || !images) {
@@ -186,15 +186,38 @@ app.post("/api/add-developer", async (req, res) => {
 			images,
 		});
 
+		// get developers after insert
+		const developersSnapshot = await admin
+			.database()
+			.ref("developers")
+			.once("value");
+		const developers = developersSnapshot.val();
+		// Check if developers exist
+		if (!developers) {
+			return res.status(404).json({
+				message: "No developers found",
+				success: 0,
+				data: null,
+			});
+		}
+
+		// Convert developers object to an array
+		const developersArray = Object.keys(developers).map((key) => ({
+			id: key,
+			...developers[key],
+		}));
+
 		res.status(200).json({
 			message: "Developer information stored successfully",
 			success: 1,
+			data: developersArray,
 		});
 	} catch (error) {
 		console.error("Error storing developer information:", error);
 		res.status(500).json({
 			message: "Failed to store developer information",
 			success: 0,
+			data: null,
 		});
 	}
 });
