@@ -6,7 +6,25 @@ const AddDeveloperForm = ({ devData }) => {
 		description: "",
 		image: null,
 	});
+	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+	const clearError = () => {
+		setTimeout(() => {
+			setErrorMessage("");
+		}, 3000);
+	};
 
+	const showSuccess = () => {
+		setTimeout(() => {
+			setSuccessMessage("");
+			setFormData({
+				firstName: "",
+				lastName: "",
+				email: "",
+				message: "",
+			});
+		}, 3000);
+	};
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		setFormData({
@@ -33,6 +51,8 @@ const AddDeveloperForm = ({ devData }) => {
 		formDataToSend.append("image", image);
 
 		try {
+			setErrorMessage("");
+			setSuccessMessage("");
 			const response = await fetch(
 				"http://localhost:3000/api/add-developer",
 				{
@@ -41,6 +61,7 @@ const AddDeveloperForm = ({ devData }) => {
 				}
 			);
 			if (!response.ok) {
+				setErrorMessage("Error, Try again");
 				throw new Error("Failed to submit developer details");
 			}
 			// alert("Developer details submitted successfully!");
@@ -52,9 +73,11 @@ const AddDeveloperForm = ({ devData }) => {
 			const dataRes = await response.json();
 			console.log("add dev resp", dataRes.data);
 			devData(dataRes.developers);
+			setSuccessMessage(dataRes.message);
+			// showSuccess()
 		} catch (error) {
 			console.error("Error submitting developer details:", error);
-			alert(error.message);
+			setErrorMessage(error.message);
 		}
 	};
 
@@ -65,6 +88,16 @@ const AddDeveloperForm = ({ devData }) => {
 				className="mx-auto my-5 max-w-xl border-p-grey p-5 rounded shadow-lg"
 				onSubmit={handleSubmit}
 			>
+				{errorMessage && (
+					<div className=" bg-p-tomato text-p-white p-3 w-full flex justify-center mb-5">
+						{errorMessage}
+					</div>
+				)}
+				{successMessage && (
+					<div className=" bg-p-green text-p-white p-3 w-full flex justify-center mb-5">
+						{successMessage}
+					</div>
+				)}
 				<div className="grid grid-cols-1 gap-x-8 gap-y-6">
 					<div>
 						<label className="block text-sm font-semibold leading-6 text-gray-900">

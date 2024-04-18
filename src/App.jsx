@@ -160,7 +160,7 @@ function App() {
 	const checkAuth = () => {
 		// get localSortage
 		const token = localStorage.getItem("wapp");
-		console.log("token from localStorage", token);
+		// console.log("token from localStorage", token);
 		// set isAuthenticated = true is the token is in localStorage
 		if (token != null && token != "") {
 			// console.log("user is authenticated");

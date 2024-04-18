@@ -179,7 +179,7 @@ app.post("/api/add-developer", async (req, res) => {
 		}
 
 		// Store developer information in Firebase Realtime Database
-		const developerRef = admin.database().ref("developers").push();
+		const developerRef = admin.database().ref("new-dev-db").push();
 		await developerRef.set({
 			name,
 			description,
@@ -189,7 +189,7 @@ app.post("/api/add-developer", async (req, res) => {
 		// get developers after insert
 		const developersSnapshot = await admin
 			.database()
-			.ref("developers")
+			.ref("new-dev-db")
 			.once("value");
 		const developers = developersSnapshot.val();
 		// Check if developers exist
@@ -227,7 +227,7 @@ app.get("/api/developers", async (req, res) => {
 		// Retrieve all developers from Firebase Realtime Database
 		const developersSnapshot = await admin
 			.database()
-			.ref("developers")
+			.ref("new-dev-db")
 			.once("value");
 		const developers = developersSnapshot.val();
 

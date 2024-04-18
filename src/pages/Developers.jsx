@@ -70,13 +70,24 @@ function Developers({ isDarkMode, isAuthenticated }) {
 							key={developer?.id}
 							className="flex box-width rounded-lg shadow-md p-4"
 						>
-							<img
-								className="img-width h-auto"
-								src={`data:image/svg+xml;base64,${arrayBufferToBase64(
-									developer?.images[0]?.buffer
-								)}`}
-								alt={developer?.name}
-							/>
+							{developer.images[0].mimetype ===
+							"image/svg+xml" ? (
+								<img
+									className="img-width h-auto"
+									src={`data:image/svg+xml;base64,${arrayBufferToBase64(
+										developer.images[0].buffer
+									)}`}
+									alt={developer.name}
+								/>
+							) : (
+								<img
+									className="img-width h-auto"
+									src={`data:image/*;base64,${arrayBufferToBase64(
+										developer.images[0].buffer
+									)}`}
+									alt={developer.name}
+								/>
+							)}
 
 							<div>
 								<p className="m-4 font-semibold text-xl">
