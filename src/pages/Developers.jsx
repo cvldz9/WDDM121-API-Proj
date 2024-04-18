@@ -1,10 +1,47 @@
+// import React, { useState, useEffect } from "react";
 import "./Developers.css";
-import JosephImage from "../assets/joseph.svg";
-import DanielImage from "../assets/daniel.svg";
-import PattyImage from "../assets/patty.svg";
-import CatherineImage from "../assets/catherine.svg";
+import AddDeveloperForm from "../components/AddDeveloperForm";
+import { useState, useEffect } from "react";
 
-function Developers({ isDarkMode }) {
+function Developers({ isDarkMode, isAuthenticated }) {
+	const [developers, setDevelopers] = useState([]);
+
+	const arrayBufferToBase64 = (buffer) => {
+		let binary = "";
+		const bytes = new Uint8Array(buffer);
+		const len = bytes.byteLength;
+		for (let i = 0; i < len; i++) {
+			binary += String.fromCharCode(bytes[i]);
+		}
+		return window.btoa(binary);
+	};
+
+	const handleDevData = (data) => {
+		const devs = data;
+		if (devs) {
+			setDevelopers(devs);
+		}
+	};
+	useEffect(() => {
+		const fetchDevelopers = async () => {
+			try {
+				const response = await fetch(
+					"http://localhost:3000/api/developers"
+				);
+				if (!response.ok) {
+					throw new Error("Failed to fetch developers");
+				}
+				const data = await response.json();
+
+				setDevelopers(data.developers);
+			} catch (error) {
+				console.error("Error fetching developers:", error);
+			}
+		};
+
+		fetchDevelopers();
+	}, []);
+
 	return (
 		<>
 			<div className="flex flex-col items-center overflow-y-auto">
@@ -23,113 +60,34 @@ function Developers({ isDarkMode }) {
 					</p>
 				</div>
 
+				{isAuthenticated && (
+					<AddDeveloperForm devData={handleDevData} />
+				)}
+
 				<div className="grid gap-10 grid-cols-2 grid-rows-2">
-					<div className="flex box-width rounded-lg shadow-md p-4">
-						<img
-							className="img-width h-auto"
-							src={JosephImage}
-							alt=""
-						/>
-						<div>
-							<p className="m-4 font-semibold text-xl">
-								Joseph Moses
-							</p>
-							<p className="m-4 font-normal text-s text-justify">
-								Joseph is a seasoned web developer with a decade
-								of hands-on experience in the field. Proficient
-								in a wide array of technologies such as{" "}
-								<strong>React</strong>,{" "}
-								<strong>JavaScript</strong>, and{" "}
-								<strong>Vue</strong>, he brings a wealth of
-								knowledge and expertise to any project. With a
-								track record of delivering high-quality
-								solutions, Joseph combines technical prowess
-								with creativity to drive innovation and success.
-							</p>
-						</div>
-					</div>
+					{developers?.map((developer) => (
+						<div
+							key={developer?.id}
+							className="flex box-width rounded-lg shadow-md p-4"
+						>
+							<img
+								className="img-width h-auto"
+								src={`data:image/svg+xml;base64,${arrayBufferToBase64(
+									developer?.images[0]?.buffer
+								)}`}
+								alt={developer?.name}
+							/>
 
-					<div className="flex box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
-						<img
-							className="img-width h-auto"
-							src={DanielImage}
-							alt=""
-						/>
-						<div>
-							<p className="m-4 font-semibold text-xl">
-								Daniel Okonkwo
-							</p>
-							<p className="m-4 font-normal text-s text-justify">
-								Lorem, ipsum dolor sit amet consectetur
-								adipisicing elit. Quam illo quas unde voluptatem
-								perferendis quo quis quidem delectus tempora ad.
-								Molestias inventore dolorem saepe magni deleniti
-								eveniet sunt asperiores aut non aliquid voluptas
-								libero dicta, id sequi sapiente expedita
-								officiis quos nihil ipsum exercitationem. Id
-								molestiae dolore aliquid dolor dicta.
-							</p>
+							<div>
+								<p className="m-4 font-semibold text-xl">
+									{developer?.name}
+								</p>
+								<p className="m-4 font-normal text-s text-justify">
+									{developer?.description}
+								</p>
+							</div>
 						</div>
-					</div>
-
-					<div className="flex box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
-						<img
-							className="img-width h-auto"
-							src={PattyImage}
-							alt=""
-						/>
-						<div>
-							<p className="m-4 font-semibold text-xl">
-								Patty Bactad
-							</p>
-							<p className="m-4 font-normal text-s text-justify">
-								Patty is a seasoned{" "}
-								<strong>
-									Senior Information Security Engineer
-								</strong>{" "}
-								with 8 years of experience. She excels in
-								developing robust security protocols and
-								conducting vulnerability assessments.
-								Additionally, Patty brings proficiency in{" "}
-								<strong>graphic</strong> and{" "}
-								<strong>web design</strong>, combining
-								creativity with her technical expertise to
-								deliver innovative solutions and captivating
-								design projects.
-							</p>
-						</div>
-					</div>
-
-					<div className="flex box-width bg-gray-200 border border-gray-400 rounded-lg shadow-md p-4">
-						<img
-							className="img-width h-auto"
-							src={CatherineImage}
-							alt=""
-						/>
-						<div>
-							<p className="m-4 font-semibold text-xl">
-								Catherine Valdez
-							</p>
-							<p className="m-4 font-normal text-s text-justify">
-								Catherine has a strong background in{" "}
-								<strong>software testing</strong>,{" "}
-								<strong>UI/UX design</strong>, and{" "}
-								<strong>web design</strong>. With her expertise,
-								she ensures the quality and functionality of
-								software products through rigorous testing
-								methodologies. Additionally, her keen eye for
-								design and user experience allows her to create
-								visually appealing and intuitive interfaces that
-								enhance user engagement and satisfaction.
-							</p>
-						</div>
-					</div>
-
-					<div>
-						<a href="https://www.cartoonize.net/avatar-maker/">
-							Resource: ColorCinch
-						</a>
-					</div>
+					))}
 				</div>
 			</div>
 		</>

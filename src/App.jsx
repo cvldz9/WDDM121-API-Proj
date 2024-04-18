@@ -231,7 +231,12 @@ function App() {
 
 						<Route
 							path="/developers"
-							element={<Developers isDarkMode={isDarkMode} />}
+							element={
+								<Developers
+									isDarkMode={isDarkMode}
+									isAuthenticated={isAuthenticated}
+								/>
+							}
 						/>
 
 						<Route
