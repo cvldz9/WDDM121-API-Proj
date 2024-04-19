@@ -18,8 +18,11 @@ function Developers({ isDarkMode, isAuthenticated }) {
 
 	const handleDevData = (data) => {
 		const devs = data;
+		// console.log("devs.....", devs);
+		// console.log("before update", developers);
 		if (devs) {
 			setDevelopers(devs);
+			// console.log("after update", developers);
 		}
 	};
 	useEffect(() => {

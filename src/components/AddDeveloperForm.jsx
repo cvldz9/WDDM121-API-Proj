@@ -4,7 +4,7 @@ const AddDeveloperForm = ({ devData }) => {
 	const [formData, setFormData] = useState({
 		name: "",
 		description: "",
-		image: null,
+		image: "",
 	});
 	const [errorMessage, setErrorMessage] = useState("");
 	const [successMessage, setSuccessMessage] = useState("");
@@ -18,10 +18,9 @@ const AddDeveloperForm = ({ devData }) => {
 		setTimeout(() => {
 			setSuccessMessage("");
 			setFormData({
-				firstName: "",
-				lastName: "",
-				email: "",
-				message: "",
+				name: "",
+				description: "",
+				image: "",
 			});
 		}, 3000);
 	};
@@ -43,6 +42,9 @@ const AddDeveloperForm = ({ devData }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
+		setErrorMessage("");
+		setSuccessMessage("");
+
 		const { name, description, image } = formData;
 		const formDataToSend = new FormData();
 		console.log("formDataToSend", formDataToSend);
@@ -51,8 +53,6 @@ const AddDeveloperForm = ({ devData }) => {
 		formDataToSend.append("image", image);
 
 		try {
-			setErrorMessage("");
-			setSuccessMessage("");
 			const response = await fetch(
 				"http://localhost:3000/api/add-developer",
 				{
@@ -71,13 +71,14 @@ const AddDeveloperForm = ({ devData }) => {
 				image: "",
 			});
 			const dataRes = await response.json();
-			console.log("add dev resp", dataRes.data);
-			devData(dataRes.developers);
+			// console.log("add dev resp", dataRes.data);
+			devData(dataRes.data);
 			setSuccessMessage(dataRes.message);
-			// showSuccess()
+			showSuccess();
 		} catch (error) {
 			console.error("Error submitting developer details:", error);
 			setErrorMessage(error.message);
+			clearError();
 		}
 	};
 
