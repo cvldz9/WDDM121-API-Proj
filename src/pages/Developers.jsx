@@ -2,6 +2,7 @@
 import "./Developers.css";
 import AddDeveloperForm from "../components/AddDeveloperForm";
 import { useState, useEffect } from "react";
+import { baseURL } from "../config/api";
 
 function Developers({ isDarkMode, isAuthenticated }) {
 	const [developers, setDevelopers] = useState([]);
@@ -28,9 +29,7 @@ function Developers({ isDarkMode, isAuthenticated }) {
 	useEffect(() => {
 		const fetchDevelopers = async () => {
 			try {
-				const response = await fetch(
-					"http://localhost:3000/api/developers"
-				);
+				const response = await fetch(`${baseURL}/developers`);
 				if (!response.ok) {
 					throw new Error("Failed to fetch developers");
 				}

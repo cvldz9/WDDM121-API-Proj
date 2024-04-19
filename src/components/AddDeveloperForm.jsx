@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { baseURL } from "../config/api";
 
 const AddDeveloperForm = ({ devData }) => {
 	const [formData, setFormData] = useState({
@@ -53,13 +54,10 @@ const AddDeveloperForm = ({ devData }) => {
 		formDataToSend.append("image", image);
 
 		try {
-			const response = await fetch(
-				"http://localhost:3000/api/add-developer",
-				{
-					method: "POST",
-					body: formDataToSend,
-				}
-			);
+			const response = await fetch(`${baseURL}/add-developer`, {
+				method: "POST",
+				body: formDataToSend,
+			});
 			if (!response.ok) {
 				setErrorMessage("Error, Try again");
 				throw new Error("Failed to submit developer details");
