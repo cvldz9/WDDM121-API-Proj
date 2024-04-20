@@ -175,6 +175,7 @@ app.post("/api/add-developer", async (req, res) => {
 			return res.status(400).json({
 				message: "All fields are required",
 				success: 0,
+				data: null,
 			});
 		}
 
@@ -254,6 +255,140 @@ app.get("/api/developers", async (req, res) => {
 		res.status(500).json({
 			message: "Failed to retrieve developers",
 			success: 0,
+		});
+	}
+});
+
+// Update developers
+app.put("/api/developers/:id", async (req, res) => {
+	const developerId = req.params.id;
+	const images = req.files;
+	console.log("image", images);
+	const { name, description } = req.body;
+
+	try {
+		// Check if the developer exists
+		const developerRef = admin.database().ref(`new-dev-db/${developerId}`);
+		const snapshot = await developerRef.once("value");
+		const developerData = snapshot.val();
+
+		if (!developerData) {
+			return res
+				.status(404)
+				.json({ message: "Developer not found", success: 0 });
+		}
+
+		// Update developer information
+		const updateData = {};
+
+		if (name) updateData.name = name;
+		if (description) updateData.description = description;
+		if (images && images.length > 0) {
+			// Assuming images is an array of file objects
+			// const imageUrls = [];
+
+			// // Upload images to storage and get URLs
+			// for (const image of images) {
+			//     // Upload image to storage and get URL
+			//     const imageUrl = await uploadImageToStorage(image);
+
+			//     // Push URL to imageUrls array
+			//     imageUrls.push(imageUrl);
+			// }
+
+			updateData.images = images;
+		}
+
+		const dataToUpdate = {
+			name: updateData.name,
+			description: updateData.description,
+			images: updateData.images,
+		};
+
+		await developerRef.update(dataToUpdate);
+
+		// get developers after insert
+		const developersSnapshot = await admin
+			.database()
+			.ref("new-dev-db")
+			.once("value");
+		const developers = developersSnapshot.val();
+
+		// Check if developers exist
+		if (!developers) {
+			return res.status(404).json({
+				message: "No developers found",
+				success: 0,
+				data: null,
+			});
+		}
+
+		// Convert developers object to an array
+		const developersArray = Object.keys(developers).map((key) => ({
+			id: key,
+			...developers[key],
+		}));
+
+		console.log("developersArray", developersArray);
+
+		return res.status(200).json({
+			message: "Developer updated successfully",
+			success: 1,
+			data: developersArray,
+		});
+	} catch (error) {
+		console.error("Error updating developer:", error);
+		return res.status(500).json({
+			message: "Internal server error",
+			success: 0,
+			data: null,
+		});
+	}
+});
+
+// Delete developer
+app.delete("/api/developers/:id", async (req, res) => {
+	const developerId = req.params.id;
+
+	console.log("delete dev Id", developerId);
+
+	try {
+		// Check if the developer exists
+		const developerRef = admin.database().ref(`new-dev-db/${developerId}`);
+		const snapshot = await developerRef.once("value");
+		const developerData = snapshot.val();
+
+		if (!developerData) {
+			return res.status(404).json({ message: "Developer not found" });
+		}
+
+		// Delete the developer
+		await developerRef.remove();
+
+		// get developers after insert
+		const developersSnapshot = await admin
+			.database()
+			.ref("new-dev-db")
+			.once("value");
+		const developers = developersSnapshot.val();
+
+		// Convert developers object to an array
+		const developersArray = Object.keys(developers).map((key) => ({
+			id: key,
+			...developers[key],
+		}));
+
+		res.status(200).json({
+			message: "Developer deleted successfully",
+			success: 1,
+			data: developersArray,
+		});
+	} catch (error) {
+		console.error("Error deleting developer:", error);
+		res.status(500).json({
+			message: "Internal server error",
+			success: 0,
+			data: [],
 		});
 	}
 });

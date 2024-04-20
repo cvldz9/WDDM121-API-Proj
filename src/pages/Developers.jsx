@@ -3,9 +3,11 @@ import "./Developers.css";
 import AddDeveloperForm from "../components/AddDeveloperForm";
 import { useState, useEffect } from "react";
 import { baseURL } from "../config/api";
+import { MdEdit, MdDeleteForever } from "react-icons/md";
 
 function Developers({ isDarkMode, isAuthenticated }) {
 	const [developers, setDevelopers] = useState([]);
+	const [editDevData, setEditDevData] = useState(null);
 
 	const arrayBufferToBase64 = (buffer) => {
 		let binary = "";
@@ -26,6 +28,41 @@ function Developers({ isDarkMode, isAuthenticated }) {
 			// console.log("after update", developers);
 		}
 	};
+
+	const handleDelete = async (id) => {
+		const confirmDelete = window.confirm(
+			"Are you sure you want to delete this developer?"
+		);
+		if (confirmDelete) {
+			try {
+				const response = await fetch(`${baseURL}/developers/${id}`, {
+					method: "DELETE",
+				});
+				if (!response.ok) {
+					throw new Error("Failed to delete developer");
+				}
+				// Remove the deleted developer from the state
+				setDevelopers((prevDevelopers) =>
+					prevDevelopers.filter((developer) => developer.id !== id)
+				);
+				const resData = await response.json();
+				console.log("Data after deletion:", resData);
+				alert(`Success: ${resData.message}`);
+			} catch (error) {
+				alert(`Error deleting developer: ` + error?.message);
+				console.error("Error deleting developer:", error?.message);
+				// Handle error
+			}
+		} else {
+			console.log("Deletion canceled");
+		}
+	};
+
+	const handleEdit = (dev) => {
+		console.log("edit dev", dev);
+		setEditDevData(dev);
+	};
+
 	useEffect(() => {
 		const fetchDevelopers = async () => {
 			try {
@@ -63,7 +100,10 @@ function Developers({ isDarkMode, isAuthenticated }) {
 				</div>
 
 				{isAuthenticated && (
-					<AddDeveloperForm devData={handleDevData} />
+					<AddDeveloperForm
+						devData={handleDevData}
+						editDev={editDevData}
+					/>
 				)}
 
 				<div className="grid gap-10 grid-cols-2 grid-rows-2">
@@ -91,7 +131,19 @@ function Developers({ isDarkMode, isAuthenticated }) {
 								/>
 							)}
 
-							<div>
+							<div className="flex flex-col w-full">
+								<div className="flex justify-end gap-3 flex-grow-1">
+									<MdEdit
+										className="cursor-pointer fill-p-blue"
+										onClick={() => handleEdit(developer)}
+									/>
+									<MdDeleteForever
+										className="cursor-pointer fill-p-tomato"
+										onClick={() =>
+											handleDelete(developer?.id)
+										}
+									/>
+								</div>
 								<p className="m-4 font-semibold text-xl">
 									{developer?.name}
 								</p>
