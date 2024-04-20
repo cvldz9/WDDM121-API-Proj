@@ -30,7 +30,3 @@
 1. On the developer listing cards, click on the trash card icon(in red)
 2. Confirm delete action
 3. Developer is deleted from the list
-
-
-
-
