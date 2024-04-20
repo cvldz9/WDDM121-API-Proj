@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { baseURL } from "../config/api";
 import "./Contact.css";
 
 function Contact({ isDarkMode }) {
@@ -22,7 +23,7 @@ function Contact({ isDarkMode }) {
 
 	const submitContact = async (email, password) => {
 		setErrorMessage("");
-		await fetch(`http://localhost:3000/api/contact`, {
+		await fetch(`${baseURL}/contact`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
